@@ -1,5 +1,4 @@
  function onLoadAd() {
-	alert( 'onLoadAd()' ); //debug
 	
 	var admobid = {};
 	if( /(android)/i.test(navigator.userAgent) ) { 
@@ -19,8 +18,8 @@
 		};
 	}
 	
-	document.addEventListener('deviceready', debug, false); //debug
-	document.addEventListener('deviceready', initApp, false);
+	debug();
+	initApp();
 		
 	function initApp() {
 		if (! AdMob ) { alert( 'Error loading Ads' ); return; }
