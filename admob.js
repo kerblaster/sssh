@@ -31,7 +31,7 @@
 			adSize:'MEDIUM_RECTANGLE', 
 			overlap:true, 
 			position:AdMob.AD_POSITION.BOTTOM_CENTER, 
-			autoShow:true}
+			autoShow:true} );
 	}
 		
 	function debug(){
