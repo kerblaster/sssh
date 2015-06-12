@@ -7,6 +7,7 @@
 	<meta name="description" content="Interactive set rules for the competitive Super Smash Brothers series" />
 	<link rel="shortcut icon" href="../images/fav.ico" />
 	<link rel="stylesheet" type="text/css" href="../style.css" />
+	<script type="text/javascript" src="../admob.js"></script>
 	<script type="text/javascript" src="../scripts.js"></script>
 	<script>
 		var banCounter;	//at max 1 ban
@@ -115,7 +116,7 @@
 		}
 	</script>
 </head>
-<body onload="refreshHeader();refreshScore();stagePick();rectanglify('.buttonStage',2);">
+<body onload="refreshHeader();refreshScore();stagePick();rectanglify('.buttonStage',2);onLoadAd();">
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
