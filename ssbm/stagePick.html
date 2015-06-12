@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Super Smash Set Helper</title>
+	<meta name="author" content="Renard Tumbokon, kerblaster" />
+	<meta name="description" content="Interactive set rules for the competitive Super Smash Brothers series" />
+	<link rel="shortcut icon" href="../images/fav.ico" />
+	<link rel="stylesheet" type="text/css" href="../style.css" />
+	<script type="text/javascript" src="../scripts.js"></script>
+	<script type="text/javascript" src="../admob.js"></script>
+	<script>
+		var banCounter;	//at max 1 ban
+		function stagePick(){//updates html text onload
+			//stage ban/legal format
+			var event = getCookie("event");
+			if (event == "SINGLES"){	//hidden kj, ps enabled after game 1
+				document.getElementById('kjDiv').style.display = "none";
+			}
+			else if (event == "DOUBLES"){	//hidden fod, kj visible counterpick
+				document.getElementById('fodDiv').style.display = "none";
+				//document.getElementById('kj').style.backgroundImage = "url('../images/ban.png')";			//already banned below
+				//document.getElementById('kj').onclick = "counterpickAlert()";	//already banned below
+			}
+			else{alert("error: stageBansInitial(); event="+event);}
+			//auto ban stages winner already won in
+			var prevWinner = getCookie("winner");
+			var loser = opposite(prevWinner); //note: loser's pick and dsr rule on loser
+			var loser_stagesWon = loser+"_stagesWon"; //right/left_stagesWon is a cookie name
+			var stagesBanString = getCookie(loser_stagesWon);	//get cookie of stages won winner
+			if (stagesBanString != "null"){	//has won a stage before
+				var stagesBanArray = stagesBanString.split(",");	//make into array
+				//console.log("stagesBanName="+stagesBanName+"|stagesBanString="+stagesBanString+"|stagesBanArray="+stagesBanArray+"| stagesBanArray.length="+ stagesBanArray.length);	//debug
+				for (x = 0; x < stagesBanArray.length; x++){
+					var stageToBan = stagesBanArray[x];
+					stageToBan = translateStage(stageToBan); //convert from name->id
+					if (stageToBan != "ma"){	//ignore/dont cross out mutual agreement
+						//console.log(x+" = "+stageToBan)	//debug
+						var img = document.getElementById(stageToBan);
+						img.src = "../images/ban.png";	//add red cross out
+						var stageDiv = stageToBan+"Div";
+						document.getElementById(stageDiv).onclick="#";	//make banned stage unclickable
+					}
+				}	
+			}
+			else{	//never won a stage yet
+				//console.log("Never won a stage yet");
+				//console.log("loser_stagesWon="+loser_stagesWon+"|stagesBanString="+stagesBanString+" <-should be null");	//debug
+			}
+			//set html depending on series bo3/bo5
+			var bestOf = getCookie("bestOf");
+			var winner = getCookie("winner");
+			if (bestOf == "BO3"){	//bo3: banning->pick phase
+				banCounter = 1;
+				boxPoint(winner);	//winner bans
+				banHTML();
+			}
+			else if(bestOf == "BO5"){	//bo5: pick phase
+				banCounter = 0;
+				var loser = opposite(winner);
+				boxPoint(loser);	//loser picks
+				pickHTML();
+			}
+			else{
+				alert("error: stagePick(); bestOf="+bestOf);
+				//note if bo1 is sent here = error
+			}
+		}
+		function banHTML(){	//different from initialStageBans
+			document.getElementById('instructions').style.background = "red";
+			document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/><b>[BAN]</b> &#8658; PICK";
+		}
+		function pickHTML(){ //different from initialStageBans
+			var bestOf = getCookie("bestOf");
+			if (bestOf == "BO5"){	//no bans
+				document.getElementById('instructions').style.background = "#00EE00"; //green
+				document.getElementById('instructions').innerHTML = matchDetails() + "Pick a stage: <br/><b>[PICK]</b>";
+			}
+			else if (bestOf == "BO3"){	//bestOf == BO3
+				document.getElementById('instructions').style.background = "#00EE00"; //green
+				document.getElementById('instructions').innerHTML = matchDetails() + "Pick a stage: <br/>BAN &#8658; <b>[PICK]</b>";
+			}
+			else{
+				alert ("pickHTML(); besOf="+bestOf);
+			}
+		}
+		function stageStriking(stage){//when pressed on a stage
+			var winner = getCookie("winner");	
+			var loser = opposite(winner);
+			if (banCounter == 1){	//bo3
+				setCookie("ban",stage);
+				var img = document.getElementById(stage);
+				img.src = "../images/ban.png";
+				var stageDiv = stage+"Div";
+				document.getElementById(stageDiv).onclick="#";	//make banned stage unclickable
+				pickHTML(); //after ban => pick update html
+				boxPoint(loser); //loser picks stage
+				location.href = "#top"; 	//scroll to top
+				banCounter--;	
+			}
+			else if (banCounter == 0){	//bo5 or alrdy banned
+				//convert code to actual stage name and make cookie
+				var fullNameStage = translateStage(stage);
+				setCookie("stage",fullNameStage);
+				//send to character select
+				if (winner == "left"){	//prev winner chooses character first
+					parent.location='characterSelectLeft.html';
+				}
+				else if (winner == "right"){
+					parent.location='characterSelectRight.html';
+				}
+				else{
+					alert("error: stageStriking(); winner="+winner);	//error
+				}
+			}
+		}
+	</script>
+</head>
+<body onload="refreshHeader();refreshScore();stagePick();rectanglify('.buttonStage',2);">
+
+<div id="header"> Super Smash Set Helper
+	<div id="description" > <!--bar displays description-->
+		<img id="floatLeft" onclick="home();" src="../images/logo.png"/>  <!--Go home-->
+		<img id="floatRight" onclick="help('stagePick');" src="../images/back.png"></img>  <!--Go back and edit-->
+		<span id="status">MELEE</span>
+	</div>
+</div>
+<!------------------------------------------------------------------------->
+<div class="main"> <a name="top"></a>
+	<div id="turnBox" ></div>
+	<div id="instructions"></div>
+	
+	<div class="buttonStage" id="bfDiv" style="background-image: url(images/bf.png);" onclick="stageStriking('bf')"> 
+		<img class="imgStage"  id="bf" src="../images/blank.png"/>
+		Battlefield
+	</div>
+	<div class="buttonStage" id="dlDiv" style="background-image: url(images/dl.png);" onclick="stageStriking('dl')"> 
+		<img class="imgStage"  id="dl" src="../images/blank.png"/>
+		Dream Land
+	</div>
+	<div class="buttonStage" id="fdDiv" style="background-image: url(images/fd.png);" onclick="stageStriking('fd')"> 
+		<img class="imgStage"  id="fd" src="../images/blank.png"/>
+		Final Destination
+	</div>
+	<div class="buttonStage" id="fodDiv" style="background-image: url(images/fod.png);" onclick="stageStriking('fod')"> 
+		<img class="imgStage"  id="fod" src="../images/blank.png"/>
+		Fountain of Dreams
+	</div>
+	<div class="buttonStage" id="kjDiv" style="background-image: url(images/kj.png);" onclick="stageStriking('kj')"> 
+		<img class="imgStage"  id="kj" src="../images/blank.png"/> 
+		Kongo Jungle
+	</div>
+	<div class="buttonStage" id="psDiv" style="background-image: url(images/ps.png);" onclick="stageStriking('ps')"> 
+		<img class="imgStage"  id="ps" src="../images/blank.png"/> 
+		Pokemon Stadium
+	</div>
+	<div class="buttonStage" id="ysDiv" style="background-image: url(images/ys.png);" onclick="stageStriking('ys')"> 
+		<img class="imgStage"  id="ys" src="../images/blank.png"/>
+		Yoshi's Story
+	</div>
+	<div class="buttonStage" id="maDiv" style="background-image: url(images/ma.png);" onclick="mutual()"> 
+		Mutual Agreement
+	</div>
+</div>
+	<div class="score" id="leftScore"></div>
+	<div class="score" id="rightScore"></div>
+</body>
+</html>

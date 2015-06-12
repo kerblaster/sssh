@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Super Smash Set Helper</title>
+	<meta name="author" content="Renard Tumbokon, kerblaster" />
+	<meta name="description" content="Interactive set rules for the competitive Super Smash Brothers series" />
+	<link rel="shortcut icon" href="../images/fav.ico" />
+	<link rel="stylesheet" type="text/css" href="../style.css" />
+	<script type="text/javascript" src="../scripts.js"></script>
+	<script>
+		var banCounter = 6;	//decreases per ban
+		function stageBansInitial(){//updates html text onload
+			//stage ban/legal cleanup
+			var event = getCookie("event");
+			if (event == "SINGLES" && banCounter == 6){	//hidden dp, visible ys
+				document.getElementById('dpDiv').style.display = "none";
+			}
+			else if (event == "DOUBLES" && banCounter == 6){	//visible dp, hidden ys
+				document.getElementById('ysDiv').style.display = "none";
+			}
+			//do before the banCounter-th ban
+			if (banCounter > 0){	//banning phase
+				document.getElementById('instructions').style.background = "red";
+				if (banCounter == 6){	//does when page first loads
+					document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/> <b>[BAN]</b> &#8658; BAN-BAN &#8658; BAN-BAN &#8658; BAN &#8658; PICK";
+					//selecting controller port or SECOND Stage Strike, opposite of melee functionality thus req change pointer
+					switchChooser();	
+					turnBoxPoint();
+				}
+				else if (banCounter == 5){
+					document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/> BAN &#8658; <b>[BAN]</b>-BAN &#8658; BAN-BAN &#8658; BAN &#8658; PICK";
+					switchChooser();
+					turnBoxPoint();
+				}
+				else if (banCounter == 4){
+					document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/> BAN &#8658; BAN-<b>[BAN]</b> &#8658; BAN-BAN &#8658; BAN &#8658; PICK";
+				}
+				else if (banCounter == 3){
+					document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/> BAN &#8658; BAN-BAN &#8658; <b>[BAN]</b>-BAN &#8658; BAN &#8658; PICK";
+					switchChooser();
+					turnBoxPoint();
+				}
+				else if (banCounter == 2){
+					document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/> BAN &#8658; BAN-BAN &#8658; BAN-<b>[BAN]</b> &#8658; BAN &#8658; PICK";
+				}
+				else if (banCounter == 1){
+					document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/> BAN &#8658; BAN-BAN &#8658; BAN-BAN &#8658; <b>[BAN]</b> &#8658; PICK";
+					switchChooser();
+					turnBoxPoint();
+				}
+			}
+			else if (banCounter == 0){	//pick phase
+				switchChooser();
+				document.getElementById('turnBox').style.display = "none";	//make disapear, not matter who picks stage
+				document.getElementById('instructions').style.background = "#00EE00"; //green
+				document.getElementById('instructions').innerHTML = matchDetails() + "Pick a stage: <br/> BAN &#8658; BAN-BAN &#8658; BAN-BAN &#8658; BAN &#8658; <b>[PICK]</b>";
+			}
+		}
+		function stageStriking(stage){//when pressed on a stage
+			if (banCounter > 0){	//=1+ -> do bans
+				console.log("Banned: "+stage); //debug
+				var img = document.getElementById(stage);
+				img.src = "../images/ban.png";
+				var stageDiv = stage+"Div";
+				document.getElementById(stageDiv).onclick="#";	//make banned stage unclickable
+				//alert(banCounter);
+				banCounter--;	//strictly placed for stageBansInitial();
+				location.href = "#top"; 	//scroll to top
+				stageBansInitial();	//update html
+			}
+			else if (banCounter == 0){	//=0 -> do picks
+				document.getElementById('turnBox').style.display = "none";	//make disapear 
+				//stageBansInitial();
+				//convert code to actual stage name and make cookie
+				var fullNameStage = translateStage(stage);
+				setCookie("stage",fullNameStage);
+				parent.location='game.html';
+			}
+		}
+	</script>
+</head>
+<body onload="refreshHeader();refreshScore();stageBansInitial();rectanglify('.buttonStage',2);turnBoxPoint();">
+
+<div id="header"> Super Smash Set Helper
+	<div id="description" > <!--bar displays description-->
+		<img id="floatLeft" onclick="home();" src="../images/logo.png"/>  <!--Go home-->
+		<img id="floatRight" onclick="help('stageBansInitial');" src="../images/back.png"></img>  <!--Go back and edit-->
+		<span id="status">PM</span>
+	</div>
+</div>
+<!------------------------------------------------------------------------->
+<div class="main"> <a name="top"></a>
+	<div id="turnBox" ></div>
+	<div id="instructions"></div>
+	
+	<div class="buttonStage" id="bfDiv" style="background-image: url(images/bf.png);" onclick="stageStriking('bf')"> 
+		<img class="imgStage"  id="bf" src="../images/blank.png"/>
+		Battlefield
+	</div>
+	<div class="buttonStage" id="dlDiv" style="background-image: url(images/dl.png);" onclick="stageStriking('dl')"> 
+		<img class="imgStage"  id="dl" src="../images/blank.png"/>
+		Dream Land
+	</div>
+	<div class="buttonStage" id="dpDiv" style="background-image: url(images/dp.png);" onclick="stageStriking('dp')"> 
+		<img class="imgStage"  id="dp" src="../images/blank.png"/>  <!-- Doubles Neutral Stage-->
+		Distant Planet
+	</div>
+	<div class="buttonStage" id="fdDiv" style="background-image: url(images/fd.png);" onclick="stageStriking('fd')"> 
+		<img class="imgStage"  id="fd" src="../images/blank.png"/>
+		Final Destination
+	</div>
+	<div class="buttonStage" id="fodDiv" style="background-image: url(images/fod.png);" onclick="stageStriking('fod')"> 
+		<img class="imgStage"  id="fod" src="../images/blank.png"/>
+		Fountain of Dreams
+	</div>
+	<div class="buttonStage" id="ghzDiv" style="background-image: url(images/ghz.png);" onclick="counterpickAlert()"> 
+		<img class="imgStage"  id="ghz" src="../images/ban.png"/> <!-- autoban: counterpick stage 1v1 -->
+		Green Hill Zone
+	</div>
+	<div class="buttonStage" id="lcDiv" style="background-image: url(images/lc.png);" onclick="counterpickAlert()"> 
+		<img class="imgStage"  id="lc" src="../images/ban.png"/>  <!-- autoban: counterpick stage 1v1 -->
+		Lylat Cruise
+	</div>
+	<div class="buttonStage" id="nfDiv" style="background-image: url(images/nf.png);" onclick="counterpickAlert()"> 
+		<img class="imgStage"  id="nf" src="../images/ban.png"/> <!-- autoban: counterpick stage 1v1 -->
+		Norfair
+	</div>
+	<div class="buttonStage" id="ps1Div" style="background-image: url(images/ps1.png);" onclick="counterpickAlert()"> 
+		<img class="imgStage"  id="ps1" src="../images/ban.png"/> <!-- autoban: counterpick stage 1v1 -->
+		Pokemon Stadium 1
+	</div>
+	<div class="buttonStage" id="ps2Div" style="background-image: url(images/ps2.png);" onclick="stageStriking('ps2')"> 
+		<img class="imgStage"  id="ps2" src="../images/blank.png"/> 
+		Pokemon Stadium 2
+	</div>
+	<div class="buttonStage" id="svDiv" style="background-image: url(images/sv.png);" onclick="stageStriking('sv')"> 
+		<img class="imgStage"  id="sv" src="../images/blank.png">
+		Smashville
+	</div>
+	<div class="buttonStage" id="ysDiv" style="background-image: url(images/ys.png);" onclick="stageStriking('ys')"> 
+		<img class="imgStage"  id="ys" src="../images/blank.png"> <!-- Singles Neutral Stage-->
+		Yoshi's Story
+	</div>
+	<div class="buttonStage" id="wwDiv" style="background-image: url(images/ww.png);" onclick="counterpickAlert()"> 
+		<img class="imgStage"  id="ww" src="../images/ban.png"> <!-- autoban: counterpick stage 1v1 -->
+		Wario Ware
+	</div>
+	<div class="buttonStage" id="yiDiv" style="background-image: url(images/yi.png);" onclick="counterpickAlert()"> 
+		<img class="imgStage"  id="yi" src="../images/ban.png"> <!-- autoban: counterpick stage 1v1 -->
+		Yoshi's Island
+	</div>
+	<div class="buttonStage" id="maDiv" style="background-image: url(images/ma.png);" onclick="mutual()"> 
+		Mutual Agreement
+	</div>
+</div>
+	<div class="score" id="leftScore"></div>
+	<div class="score" id="rightScore"></div>
+</body>
+</html>

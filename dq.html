@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Super Smash Set Helper</title>
+	<meta name="author" content="Renard Tumbokon, kerblaster" />
+	<meta name="description" content="Interactive set rules for the competitive Super Smash Brothers series" />
+	<link rel="shortcut icon" href="images/fav.ico" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<style>/*in the html brcause these properties are unique to the project]*/
+	#clock
+	{
+		background-color: white;
+		border-top: 10px solid black;
+		border-bottom: 10px solid black;
+		width: 100%;
+		height: 60px; /*height of button*/
+		position:relative; /*Make it one after the other*/
+		top:0;
+		right:0;
+		text-align:center;
+		font-weight:bold;
+		color: red;
+		font-size: 40px;
+		/*margin-bottom:10px; //for empty space on bottom*/
+	}
+	</style>
+	<script type="text/javascript" src="scripts.js"></script>
+	<script type="text/javascript" src="clock.js"></script>
+</head>
+<body>
+
+<div id="header"> Super Smash Set Helper
+	<div id="description" > <!--bar displays description-->
+		<img id="floatLeft" onclick="parent.location='index.html'" src="images/logo.png"/>
+		<img id="floatRight" onclick="parent.location='menu.html'" src="images/menu.png"></img>
+		<span id="status">DQ Set Timer</span>
+	</div>
+</div>
+<!------------------------------------------------------------------------->
+<div class="main" id="transMain"> <!--MAIN BODY-->
+	<div id="instructions"> 
+	Players must be punctual and be mindful of tournament flow. When their designated play times are called: <i>5 min late is a match loss</i> while <i>10 min late is a set loss</i>. <hr>Press the button to start the countdown,<br>and press the timer to restart the clock. 
+	</div>
+	<div class="button" id="timerButton" onclick="countdown('600','DISQUALIFIED')">
+		DISQUALIFY
+	</div>
+	<div id="clock" onClick="resetTimer();">
+		<span id="time" style="">00:00</span><!--span dynamically change-->
+	</div>
+</div>
+
+</body>
+</html>

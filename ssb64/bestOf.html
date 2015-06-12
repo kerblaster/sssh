@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Super Smash Set Helper</title>
+	<meta name="author" content="Renard Tumbokon, kerblaster" />
+	<meta name="description" content="Interactive set rules for the competitive Super Smash Brothers series" />
+	<link rel="shortcut icon" href="../images/fav.ico" />
+	<link rel="stylesheet" type="text/css" href="../style.css" />
+	<script type="text/javascript" src="../scripts.js"></script>
+</head>
+<body onload="refreshHeader();testCookieRecieve('title');">
+
+<div id="header"> Super Smash Set Helper
+	<div id="description" > <!--bar displays description-->
+		<img id="floatLeft" onClick="home();" src="../images/logo.png"/>  <!--Go home-->
+		<img id="floatRight" onClick="help('bestOf');" src="../images/back.png"></img>  <!--Go back and edit-->
+		<span id="status">SMASH64</span>
+	</div>
+</div>
+<!------------------------------------------------------------------------->
+<div class="main" id="transMain"> 
+	<div id="instructions">
+		Select how long the series will last:
+	</div>
+	
+	<div class="button" onClick="saveBestOf('BO1');">  <!--Add cookie-->
+		Best of 1 (1 win)
+	</div>
+	<div class="button" onClick="saveBestOf('BO3');">  <!--Add cookie-->
+		Best of 3 (2 wins)
+	</div>
+	<div class="button" onClick="saveBestOf('BO5');">  <!--Add cookie-->
+		Best of 5 (3 wins)
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Super Smash Set Helper</title>
+	<meta name="author" content="Renard Tumbokon, kerblaster" />
+	<meta name="description" content="Interactive set rules for the competitive Super Smash Brothers series" />
+	<link rel="shortcut icon" href="../images/fav.ico" />
+	<link rel="stylesheet" type="text/css" href="../style.css" />
+	<script type="text/javascript" src="../scripts.js"></script>
+	<script type="text/javascript">
+		function postGame(){
+			//update html
+			var leftWinsLeft = getCookie("left_winsLeft");	//finds winner to print
+			var rightWinsLeft = getCookie("right_winsLeft");
+			var winner;
+			if (leftWinsLeft == 0){	//left is winner
+				winner = "left";
+				document.getElementById('coin').style.left = 0;	//coin location
+			}
+			else if (rightWinsLeft == 0){	//right is winer
+				winner = "right";
+				document.getElementById('coin').style.right = 0;	//coin location
+			}
+			var leftScore = getCookie("left_winsLeft");	//finds score to print
+			var rightScore = getCookie("right_winsLeft");
+			var bestOf = getCookie("bestOf");
+			if (bestOf == "BO1"){
+				leftScore = 1-leftScore;
+				rightScore = 1-rightScore;
+			}
+			else if (bestOf == "BO3"){
+				leftScore = 2-leftScore;
+				rightScore = 2-rightScore;
+			}
+			else if (bestOf == "BO5"){
+				leftScore = 3-leftScore;
+				rightScore = 3-rightScore;
+			}
+			else{
+				alert("refreshScore();bestOf="+bestOf);	//error
+			}
+			document.getElementById('instructions').innerHTML ="<b>Winner: <font style='text-transform: capitalize;'>"+winner+" "+ teamPlayer()+"</font><hr>"
+																+leftScore+"-"+rightScore+" &#8226; "+getTime();
+			//update/visible-ize game summary
+			var gameCounter = getCookie("gameCounter");
+			var heightPerRow = (window.innerWidth)/4;
+			for (x = 1; x <= gameCounter; x++){	//game_1/2/3
+				//make display none->block
+				var divMakeVisible = "gameData"+x;	
+				document.getElementById(divMakeVisible).style.display = 'block';
+				document.getElementById(divMakeVisible).style.height = heightPerRow+"px";
+				//get game data: leftchar,rightchar,winner,stage,duration,banned
+				var gameDataArray = getCookie("game_"+x).split(",");	//make into array
+				var event = getCookie("event");
+				var url;	// = url of image. Reused for stage and both chars
+				if (event == "SINGLES"){
+					url = "url('images/"+gameDataArray[0].toLowerCase()+".png')";	//left char
+						document.getElementById("leftData"+x).style.backgroundImage = url;
+					url = "url('images/"+gameDataArray[1].toLowerCase()+".png')";	//right char
+						document.getElementById("rightData"+x).style.backgroundImage = url;
+				}
+				else if (event == "DOUBLES"){
+					leftCharArray = gameDataArray[0].toLowerCase().split("/");	//array of length 2
+						url = "url('images/"+leftCharArray[0]+".png')";	//1st left char
+						document.getElementById("leftData"+x).style.backgroundImage = url;
+						url = "images/"+leftCharArray[1]+".png";	//2nd left char
+						document.getElementById("halfLeftCharacter"+x).src=url;
+					rightCharArray = gameDataArray[1].toLowerCase().split("/");	//array of length 2
+						url = "url('images/"+rightCharArray[0]+".png')";	//1st left char
+						document.getElementById("rightData"+x).style.backgroundImage = url;
+						url = "images/"+rightCharArray[1]+".png";	//2nd left char
+						document.getElementById("halfRightCharacter"+x).src=url;
+				}
+				else{alert("postGame(); event="+event);}	//error
+					var stageName = translateStage(gameDataArray[3]);
+					url = "url('images/"+stageName+".png')";	//stage
+				document.getElementById("stageData"+x).style.backgroundImage = url;
+				text = document.getElementById("stageData"+x).innerHTML;	//add time
+				document.getElementById("stageData"+x).innerHTML = text + "<br>" + secToMin(gameDataArray[4]);
+				//declare winner of that one game
+				winnerOfGame = gameDataArray[2]; //note: var winner is declared already for set winner
+				if (winnerOfGame == "left"){
+					document.getElementById("leftData"+x).style.border = "10px solid #00EE00";	//winner
+					document.getElementById("rightData"+x).style.border = "10px solid red";	//loser
+				}
+				else if (winnerOfGame == "right"){
+					document.getElementById("leftData"+x).style.border = "10px solid red";	//loser
+					document.getElementById("rightData"+x).style.border = "10px solid #00EE00";	//winner				
+				}
+				else{
+					alert("error:postGame(); winnerOfGame="+winnerOfGame); 	//error
+				}
+			}
+			//get coin on top middle of winner's column
+			var charWidth = window.innerWidth/8;	//mid of winner
+			if (winner == "left"){
+				document.getElementById('coin').style.left = charWidth-35 +"px"; //push to middle minus coin width
+			}
+			else if (winner == "right"){
+				document.getElementById('coin').style.right = charWidth-35 +"px"; //push to middle minus coin width
+			}
+			//event listener for change dimensions
+			window.addEventListener("resize",function(){
+				//maintain height of each row
+				var heightPerRow = (window.innerWidth)/4;
+				for (x = 1; x <= gameCounter; x++){
+					var divMakeVisible = "gameData"+x;	
+					document.getElementById(divMakeVisible).style.height = heightPerRow+"px";
+				}
+				//keep coin in mid
+				var charWidth = window.innerWidth/8;
+				if (winner == "left"){
+					document.getElementById('coin').style.left = charWidth-35 +"px"; //push to middle minus coin width
+				}
+				else if (winner == "right"){
+					document.getElementById('coin').style.right = charWidth-35 +"px"; //push to middle minus coin width
+				}
+			});
+		}
+		//onmouseup and onmousedown events.. only happens in bo3 and not game 1
+		var onBans = [false,false,false,false,false];
+		function findBan(num){
+			if (onBans[num] == false){
+				var gameDataArray = getCookie("game_"+num).split(",");
+				var bannedStage = gameDataArray[5];	//5th index is banned data
+				var bestOf = getCookie("bestOf");
+				if (bestOf == "BO3" && bannedStage != "null"){
+					//change stage
+					var url = "url('images/"+bannedStage+".png')";
+					document.getElementById("bannedData"+num).style.display = "block";	
+					document.getElementById("bannedData"+num).style.backgroundImage = url;
+					onBans[num] = true;
+				}
+			}
+			else if (onBans[num] == true){
+				var bestOf = getCookie("bestOf");
+				if (bestOf == "BO3"){
+					document.getElementById("bannedData"+num).style.display = "none";
+					onBans[num] = false;
+				}
+			}
+		}
+	</script>
+</head>
+<body onload="refreshHeader();refreshScore();postGame();">
+
+<div id="header"> Super Smash Set Helper
+	<div id="description" > <!--bar displays description-->
+		<img id="floatLeft" onClick="home();" src="../images/logo.png"/>  <!--Go home-->
+		<img id="floatRight" onClick="help('postGame');" src="../images/back.png"></img>  <!--Go back and edit-->
+		<span id="status">PM</span>
+	</div>
+</div>
+<!------------------------------------------------------------------------->
+<div class="main"> 
+	<div id="instructions"></div>
+	<div id="coin"></div>
+	
+	
+	<div id="gameData1" class="gameData"><!--Game1-->
+		<div id="leftData1" class="charData">
+			<img id="halfLeftCharacter1" class="overlapChar" src="../images/blank.png"/>
+		</div> 
+		<div id= "stageData1" class="stageData">Game 1</div>
+		<div id="rightData1" class="charData">
+			<img id="halfRightCharacter1" class="overlapChar" src="../images/blank.png"/>
+		</div>
+	</div>
+	<div id="gameData2" class="gameData"><!--Game2-->
+		<div id="leftData2" class="charData">
+			<img id="halfLeftCharacter2" class="overlapChar" src="../images/blank.png"/>
+		</div> 
+		<div id= "stageData2" class="stageData" onclick="findBan('2')">
+			Game 2 
+			<div id="bannedData2" class="bannedData"><img class="imgStage" src="../images/ban.png"/></div>
+		</div>
+		<div id="rightData2" class="charData">
+			<img id="halfRightCharacter2" class="overlapChar" src="../images/blank.png"/>
+		</div>
+	</div>
+	<div id="gameData3" class="gameData"><!--Game3-->
+		<div id="leftData3" class="charData">
+			<img id="halfLeftCharacter3" class="overlapChar" src="../images/blank.png"/>
+		</div> 
+		<div id= "stageData3" class="stageData" onclick="findBan('3')">
+			Game 3 
+			<div id="bannedData3" class="bannedData"><img class="imgStage" src="../images/ban.png"/></div>
+		</div>
+		<div id="rightData3" class="charData">
+			<img id="halfRightCharacter3" class="overlapChar" src="../images/blank.png"/>
+		</div>
+	</div>
+	<div id="gameData4" class="gameData"><!--Game4-->
+		<div id="leftData4" class="charData">
+			<img id="halfLeftCharacter4" class="overlapChar" src="../images/blank.png"/>
+		</div> 
+		<div id= "stageData4" class="stageData" onclick="findBan('4')">Game 4</div>
+		<div id="rightData4" class="charData">
+			<img id="halfRightCharacter4" class="overlapChar" src="../images/blank.png"/>
+		</div>
+	</div>
+	<div id="gameData5" class="gameData"><!--Game5-->
+		<div id="leftData5" class="charData">
+			<img id="halfLeftCharacter5" class="overlapChar" src="../images/blank.png"/>
+		</div> 
+		<div id= "stageData5" class="stageData" onclick="findBan('5')">Game 5</div>
+		<div id="rightData5" class="charData">
+			<img id="halfRightCharacter5" class="overlapChar" src="../images/blank.png"/>
+		</div>
+	</div>
+</div>
+	<div class="score" id="leftScore"></div>
+	<div class="score" id="rightScore"></div>
+</body>
+</html>

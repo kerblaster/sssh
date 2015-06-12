@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Super Smash Set Helper</title>
+	<meta name="author" content="Renard Tumbokon, kerblaster" />
+	<meta name="description" content="Interactive set rules for the competitive Super Smash Brothers series" />
+	<link rel="shortcut icon" href="../images/fav.ico" />
+	<link rel="stylesheet" type="text/css" href="../style.css" />
+	<script type="text/javascript" src="../scripts.js"></script>
+	<script type="text/javascript">
+		var startTime;
+		function game(){	//onload
+			startTime = getCookie("time");	//for stage info 
+			//port priority info
+			var gameCounter = getCookie("gameCounter");
+			var player;	//player who has port priority
+			if (gameCounter == 1){	//game 1
+				player = getCookie("chooser");	//from saveRight/LeftChar()
+			}
+			else{	//game 2+ with winner data
+				var prevWinner = getCookie("winner");	
+				var loser = opposite(prevWinner);
+				setCookie("chooser",loser); //loser get port priority
+				player = loser;
+			}
+			//clear winner data
+			setCookie("winner","null");
+			//set html
+			document.getElementById('instructions').innerHTML = matchDetails() + "Note: The <font style='text-transform: capitalize;'><b>"+ player +" "+ teamPlayer()+"</b></font> has port priority.<br>"+getRuleset()+"Good luck and have fun! Select winner of the game:";
+			var width = window.innerWidth;	//style the vs
+			width = (width/2)-10;	//-10 hack?					
+			document.getElementById("vs").style.right = (width-60)+"px";
+			window.addEventListener("resize",function(){ 
+				var width = window.innerWidth;
+				width = (width/2)-10;	//-10 hack?						
+				document.getElementById("vs").style.right = (width-50)+"px";
+			});
+			//set character images
+			var event = getCookie("event");
+			if (event == "SINGLES"){	// normal pictures
+				var left = getCookie("left_character").toLowerCase();	//make sure name in cookie is same as file
+				var right = getCookie("right_character").toLowerCase();
+				document.getElementById('leftCharacter').style.backgroundImage="url('images/"+left+".png')";	//set images
+				document.getElementById('rightCharacter').style.backgroundImage="url('images/"+right+".png')";
+			}
+			else if (event == "DOUBLES"){	//slice pictures
+				var left = getCookie("left_character").toLowerCase().split("/");	//make array
+				var right = getCookie("right_character").toLowerCase().split("/");
+				document.getElementById('leftCharacter').style.backgroundImage="url('images/"+left[0]+".png')";	//left
+					document.getElementById('halfLeftCharacter').src= "images/"+left[1]+".png";	
+				document.getElementById('rightCharacter').style.backgroundImage="url('images/"+right[0]+".png')";	//right
+					document.getElementById('halfRightCharacter').src= "images/"+right[1]+".png";
+			}
+			else {alert("game(); event="+event);} //error
+			squarify('.buttonChar',2);	//make characters into squares
+			//set stage image
+			var stage = getCookie("stage");
+			var shortNameStage = translateStage(stage);
+			var url = "url('images/"+shortNameStage+".png')";
+			document.getElementById('stage').style.backgroundImage = url;
+			rectanglify('.buttonStage',1);	//make stage image into rectangle
+		}
+		function confirmWinner(winner){
+				//set confirm text
+				var winningChar;
+				var capitalizeWinner = capitalize(winner);	//for formatting
+				if(winner == "left"){
+					winningChar = getCookie("left_character");		
+					winningChar = "Confirm:\nThe " +capitalizeWinner+" "+teamPlayer()+"'s " + winningChar + " won?"
+				}
+				else if(winner == "right"){
+					winningChar = getCookie("right_character");
+					winningChar = "Confirm:\nThe " +capitalizeWinner+" "+teamPlayer()+"s " + winningChar + " won?"
+				}
+				else{
+					alert("error: confirmWinner("+winner+")");	//error
+				}
+				//confirm winner
+				if (confirm(winningChar)){
+					winGame(winner,startTime);
+				}
+		}
+	</script>
+</head>
+<body onload="refreshHeader();refreshScore();game();flashingText('flashing','red','black');time();">
+
+<div id="header"> Super Smash Set Helper
+	<div id="description" > <!--bar displays description-->
+		<img id="floatLeft" onclick="home();" src="../images/logo.png"/>  <!--Go home-->
+		<img id="floatRight" onclick="help('game');" src="../images/back.png"></img>  <!--Go back and edit-->
+		<span id="status">SMASH4</span>
+	</div>
+</div>
+<!------------------------------------------------------------------------->
+<div class="main"> 
+	<div id="instructions"></div>
+	
+	<div id="flashing">ACTIVE GAME</div>
+	<div id="vs">VS.</div>
+	
+	<div id="leftCharacter" class="buttonChar" style="float:left;" onclick="confirmWinner('left')"><!--left/rightCharacter, stage id only for js above (unique)-->
+		<img id="halfLeftCharacter" class="overlapChar" src="../images/blank.png" />
+	</div> 
+	<div id="rightCharacter" class="buttonChar" style="float:right;" onclick="confirmWinner('right')">
+		<img id="halfRightCharacter" class="overlapChar" src="../images/blank.png"/>
+	</div>
+	<div id= "stage" class="buttonStage"></div>
+</div>
+	<div class="score" id="leftScore"></div>
+	<div class="score" id="rightScore"></div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Super Smash Set Helper</title>
+	<meta name="author" content="Renard Tumbokon, kerblaster" />
+	<meta name="description" content="Interactive set rules for the competitive Super Smash Brothers series" />
+	<link rel="shortcut icon" href="images/fav.ico" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script type="text/javascript" src="scripts.js"></script>
+	<script>
+		function rps(){	
+			var way = rng();	//"left" or "right"
+			document.getElementById('turnBox').innerHTML = "<font style='text-transform: capitalize;'>" +way+" Player </font>";
+			if (way == "left"){
+				document.getElementById('turnBox').style.backgroundImage = "url('images/pointerLeft.png')";
+			}
+			else if (way == "right"){
+				document.getElementById('turnBox').style.backgroundImage = "url('images/pointerRight.png')";
+			}
+			else{alert("rps(); first="+way);}
+			document.getElementById('timerButton').style.display = "none";
+			document.getElementById('turnBox').style.display = "block";
+		}
+	</script>
+</head>
+<body>
+
+<div id="header"> Super Smash Set Helper
+	<div id="description" > <!--bar displays description-->
+		<img id="floatLeft" onclick="parent.location='index.html'" src="images/logo.png"/>
+		<img id="floatRight" onclick="parent.location='menu.html'" src="images/menu.png"></img>
+		<span id="status">Rock Paper Scissors</span>
+	</div>
+</div>
+<!------------------------------------------------------------------------->
+<div class="main" id="transMain"> <!--MAIN BODY-->
+	<div id="instructions"> 
+	During sets, players may elect to play Rock Paper Scissors to mutually decide match conflicts. 
+	<hr>Pressing the button below will decide who (left or right player) is the winner of the conflict. 
+	</div>
+	<div class="button" id="timerButton" onclick="rps();">
+		Rock Paper Scissors
+	</div>
+	<div id="turnBox" style="display:none;" onclick="window.location.reload()"></div>
+</div>
+
+</body>
+</html>

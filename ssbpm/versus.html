@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Super Smash Set Helper</title>
+	<meta name="author" content="Renard Tumbokon, kerblaster" />
+	<meta name="description" content="Interactive set rules for the competitive Super Smash Brothers series" />
+	<link rel="shortcut icon" href="../images/fav.ico" />
+	<link rel="stylesheet" type="text/css" href="../style.css" />
+	<script type="text/javascript" src="../scripts.js"></script>
+</head>
+<body onload="saveSmashTitle('pm');">
+
+<div id="header"> Super Smash Set Helper
+	<div id="description" > <!--bar displays description-->
+		<img id="floatLeft" onClick="home();" src="../images/logo.png"/>  <!--Go home-->
+		<img id="floatRight" onClick="help('versus');" src="../images/back.png"></img>  <!--Go back and edit-->
+		<span id="status">PM</span>
+	</div>
+</div>
+<!------------------------------------------------------------------------->
+<div class="main" id="transMain">
+	<div id="instructions">
+		Select versus type:
+	</div>
+	
+	<div class="button" onClick="saveEvent('SINGLES')">  <!--Add cookie-->
+		<img id="piece" src="../images/piece.png" align="left"></img>
+			Singles (1v1)
+		<img id="piece" src="../images/piece.png" align="right"></img>
+	</div>
+	<div class="button" onClick="saveEvent('DOUBLES')">  <!--Add cookie-->
+		<img id="piece" src="../images/piece.png" align="left"></img>
+		<img id="piece" src="../images/piece.png" align="left"></img>
+			Doubles (2v2)
+		<img id="piece" src="../images/piece.png" align="right"></img>
+		<img id="piece" src="../images/piece.png" align="right"></img>
+	</div>
+	<br/>
+</div>
+
+</body>
+</html>

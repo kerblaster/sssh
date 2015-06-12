@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html><!-- black bg, with scrollbar -->
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Super Smash Set Helper</title>
+	<meta name="author" content="Renard Tumbokon, kerblaster" />
+	<meta name="description" content="Interactive set rules for the competitive Super Smash Brothers series" />
+	<link rel="shortcut icon" href="../images/fav.ico" />
+	<link rel="stylesheet" type="text/css" href="../style.css" />
+	<script type="text/javascript" src="../scripts.js"></script>
+</head>
+<body onload="refreshHeader();refreshScore();squarify('.buttonChar',4);vsCharacter('right');boxPoint('left');"> <!--4.15 fits, not 4-->
+<a name="top"></a>
+
+<div id="header"> Super Smash Set Helper
+	<div id="description" > <!--bar displays description-->
+		<img id="floatLeft" onclick="home();" src="../images/logo.png"/>  <!--Go home-->
+		<img id="floatRight" onclick="help('characterSelectLeft');" src="../images/back.png"></img>  <!--Go back and edit-->
+		<span id="status">SMASH4</span>
+	</div>
+</div>
+<!------------------------------------------------------------------------->
+<div class="main"><a name="top"></a> <!-- not transparent -->
+
+	<div id="turnBox"></div>
+	<div id="instructions">Select your character:</div>
+
+	<!-- Change id (only for teams), save_Char("") and background-image relative to char -->
+	<div class="buttonChar" id="Mario" onclick="saveLeftChar('Mario');" style="background-image:url('images/mario.png');"></div>
+	<div class="buttonChar" id="Luigi" onclick="saveLeftChar('Luigi');" style="background-image:url('images/luigi.png');"></div>
+	<div class="buttonChar" id="Peach" onclick="saveLeftChar('Peach');" style="background-image:url('images/peach.png');"></div>	
+	<div class="buttonChar" id="Bowser" onclick="saveLeftChar('Bowser');" style="background-image:url('images/bowser.png');"></div>
+	
+	<div class="buttonChar" id="Yoshi" onclick="saveLeftChar('Yoshi');" style="background-image:url('images/yoshi.png');"></div>
+	<div class="buttonChar" id="Rosalina" onclick="saveLeftChar('Rosalina');" style="background-image:url('images/rosalina.png');"></div>	
+	<div class="buttonChar" id="BowserJr" onclick="saveLeftChar('BowserJr');" style="background-image:url('images/bowserjr.png');"></div>
+	<div class="buttonChar" id="Wario" onclick="saveLeftChar('Wario');" style="background-image:url('images/wario.png');"></div>
+	
+	<div class="buttonChar" id="DK" onclick="saveLeftChar('DK');" style="background-image:url('images/dk.png');"></div>
+	<div class="buttonChar" id="Diddy" onclick="saveLeftChar('Diddy');" style="background-image:url('images/diddy.png');"></div>
+	<div class="buttonChar" id="GameNWatch" onclick="saveLeftChar('GameNWatch');" style="background-image:url('images/gamenwatch.png');"></div>
+	<div class="buttonChar" id="LittleMac" onclick="saveLeftChar('LittleMac');" style="background-image:url('images/littlemac.png');"></div>
+	
+	<div class="buttonChar" id="Link" onclick="saveLeftChar('Link');" style="background-image:url('images/link.png');"></div>
+	<div class="buttonChar" id="Zelda" onclick="saveLeftChar('Zelda');" style="background-image:url('images/zelda.png');"></div>
+	<div class="buttonChar" id="Sheik" onclick="saveLeftChar('Sheik');" style="background-image:url('images/sheik.png');"></div>
+	<div class="buttonChar" id="Ganondorf" onclick="saveLeftChar('Ganondorf');" style="background-image:url('images/ganondorf.png');"></div>
+	
+	<div class="buttonChar" id="ToonLink" onclick="saveLeftChar('ToonLink');" style="background-image:url('images/toonlink.png');"></div>
+	<div class="buttonChar" id="Samus" onclick="saveLeftChar('Samus');" style="background-image:url('images/samus.png');"></div>
+	<div class="buttonChar" id="ZSS" onclick="saveLeftChar('ZSS');" style="background-image:url('images/zss.png');"></div>
+	<div class="buttonChar" id="Pit" onclick="saveLeftChar('Pit');" style="background-image:url('images/pit.png');"></div>
+	
+	<div class="buttonChar" id="Palutena" onclick="saveLeftChar('Palutena');" style="background-image:url('images/palutena.png');"></div>
+	<div class="buttonChar" id="Marth" onclick="saveLeftChar('Marth');" style="background-image:url('images/marth.png');"></div>
+	<div class="buttonChar" id="Ike" onclick="saveLeftChar('Ike');" style="background-image:url('images/ike.png');"></div>
+	<div class="buttonChar" id="Robin" onclick="saveLeftChar('Robin');" style="background-image:url('images/robin.png');"></div>
+
+	<div class="buttonChar" id="DuckHunt" onclick="saveLeftChar('DuckHunt');" style="background-image:url('images/duckhunt.png');"></div>
+	<div class="buttonChar" id="Kirby" onclick="saveLeftChar('Kirby');" style="background-image:url('images/kirby.png');"></div>
+	<div class="buttonChar" id="Dedede" onclick="saveLeftChar('Dedede');" style="background-image:url('images/dedede.png');"></div>
+	<div class="buttonChar" id="MetaKnight" onclick="saveLeftChar('MetaKnight');" style="background-image:url('images/metaknight.png');"></div>
+	
+	<div class="buttonChar" id="Fox" onclick="saveLeftChar('Fox');" style="background-image:url('images/fox.png');"></div>
+	<div class="buttonChar" id="Falco" onclick="saveLeftChar('Falco');" style="background-image:url('images/falco.png');"></div>
+	<div class="buttonChar" id="Pikachu" onclick="saveLeftChar('Pikachu');" style="background-image:url('images/pikachu.png');"></div>
+	<div class="buttonChar" id="Charizard" onclick="saveLeftChar('Charizard');" style="background-image:url('images/charizard.png');"></div>
+	
+	<div class="buttonChar" id="Lucario" onclick="saveLeftChar('Lucario');" style="background-image:url('images/lucario.png');"></div>
+	<div class="buttonChar" id="Jigglypuff" onclick="saveLeftChar('Jigglypuff');" style="background-image:url('images/jigglypuff.png');"></div>
+	<div class="buttonChar" id="Greninja" onclick="saveLeftChar('Greninja');" style="background-image:url('images/greninja.png');"></div>
+	<div class="buttonChar" id="ROB" onclick="saveLeftChar('ROB');" style="background-image:url('images/rob.png');"></div>
+	
+	<div class="buttonChar" id="Ness" onclick="saveLeftChar('Ness');" style="background-image:url('images/ness.png');"></div>
+	<div class="buttonChar" id="Lucas" onclick="saveLeftChar('Lucas');" style="background-image:url('images/lucas.png');"></div>
+	<div class="buttonChar" id="CaptFalcon" onclick="saveLeftChar('CaptFalcon');" style="background-image:url('images/captfalcon.png');"></div>
+	<div class="buttonChar" id="Villager" onclick="saveLeftChar('Villager');" style="background-image:url('images/villager.png');"></div>
+	
+	<div class="buttonChar" id="Olimar" onclick="saveLeftChar('Olimar');" style="background-image:url('images/olimar.png');"></div>	
+	<div class="buttonChar" id="WFTrainer" onclick="saveLeftChar('WFTrainer');" style="background-image:url('images/wftrainer.png');"></div>
+	<div class="buttonChar" id="Shulk" onclick="saveLeftChar('Shulk');" style="background-image:url('images/shulk.png');"></div>
+	<div class="buttonChar" id="DrMario" onclick="saveLeftChar('DrMario');" style="background-image:url('images/drmario.png');"></div>
+	
+	<div class="buttonChar" id="DarkPit" onclick="saveLeftChar('DarkPit');" style="background-image:url('images/darkpit.png');"></div>
+	<div class="buttonChar" id="Lucina" onclick="saveLeftChar('Lucina');" style="background-image:url('images/lucina.png');"></div>
+	<div class="buttonChar" id="PacMan" onclick="saveLeftChar('PacMan');" style="background-image:url('images/pacman.png');"></div>
+	<div class="buttonChar" id="MegaMan" onclick="saveLeftChar('MegaMan');" style="background-image:url('images/megaman.png');"></div>
+	
+	<div class="buttonChar" id="Sonic" onclick="saveLeftChar('Sonic');" style="background-image:url('images/sonic.png');"></div>
+	<div class="buttonChar" id="Mewtwo" onclick="saveLeftChar('Mewtwo');" style="background-image:url('images/mewtwo.png');"></div>
+	<div class="buttonChar" id="Mii" onclick="saveLeftChar('Mii');" style="background-image:url('images/mii.png');"></div>
+</div>
+	<div class="score" id="leftScore"></div>
+	<div class="score" id="rightScore"></div>
+</body>
+</html>

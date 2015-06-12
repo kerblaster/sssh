@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html style="overflow: hidden;">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Super Smash Set Helper</title>
+	<meta name="author" content="Renard Tumbokon, kerblaster" />
+	<meta name="description" content="Interactive set rules for the competitive Super Smash Brothers series" />
+	<link rel="shortcut icon" href="images/fav.ico" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script type="text/javascript" src="scripts.js"></script>
+	<script type="text/javascript">
+		function resizeHeight(){
+			main();
+			function main(){
+				var height = (Math.floor(window.innerHeight-60)/4);
+				var nodes = document.getElementsByClassName("banner");;				//loop all banner
+					//console.log("height="+height);
+				for (var i = 0; i < nodes.length; i++){
+					nodes[i].style.height = height+"px";
+					//console.log(i+"="+nodes[i].style.height);
+				}
+			}
+			window.addEventListener("resize",function(){
+				main();
+			});
+		}
+	</script>
+</head>
+<body onload="resizeHeight();">
+
+<div id="header"> Super Smash Set Helper
+	<center>
+		<div id="description" > <!--bar displays description-->
+			<img id="floatLeft" src="images/logo.png"/>
+			<img id="floatRight" onclick="parent.location='menu.html'" src="images/menu.png"></img>
+			<span id="status">- Smash your game title to begin! -</span>
+		</div>
+	</center>
+</div>
+<!------------------------------------------------------------------------->
+<div class="main"> <!--MAIN MENU BUTTON LAYOUT-->
+<a href="ssb64/versus.html"><img class="banner" src="images/banner/ssb64banner.png"></img></a>
+<a href="ssbm/versus.html"><img class="banner" src="images/banner/ssbmbanner.png"></img></a>
+<a href="ssbb/versus.html"><img class="banner" id="halfBanner" style="border-right: 3px solid black; left:0; float:left;" src="images/banner/ssbbbanner.png"></img></a>
+<a href="ssbpm/versus.html"><img class="banner" id="halfBanner" style="border-left: 3px solid black; right:0; float:right;" src="images/banner/ssbpmbanner.png"></img></a>
+<a href="ssb4/versus.html"><img class="banner"  src="images/banner/ssb4banner.png"></img></a>
+</div>
+
+</body>
+</html>
+
+
+<!--
+Order: versus.html->bestOf.html->characterSelectLeft->characterSelectRight->electPort->stageBansInitial->game->stagePick->game->postGame
+Idea: event = crew battles. On game.html press stock remaining instead
+		ironman?
+-->
+
