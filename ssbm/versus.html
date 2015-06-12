@@ -5,10 +5,11 @@
 	<title>Super Smash Set Helper</title>
 	<meta name="author" content="Renard Tumbokon, kerblaster" />
 	<meta name="description" content="Interactive set rules for the competitive Super Smash Brothers series" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 	<link rel="shortcut icon" href="../images/fav.ico" />
 	<link rel="stylesheet" type="text/css" href="../style.css" />
 	<script type="text/javascript" src="../scripts.js"></script>
-	<script type="text/javascript" src="../admob.js"></script>
 </head>
 <body onload="saveSmashTitle('melee');onLoadAd();">
 
@@ -41,6 +42,48 @@
 	</div>
 	<br/>
 	<div class="button" onClick="parent.location='../rulesets/melee.html'">Melee Ruleset</div>
+	<script>
+		var admobid = {};
+		if( /(android)/i.test(navigator.userAgent) ) { 
+			admobid = { // for Android
+				banner: 'ca-app-pub-6959590598551540/6197908715',
+				interstitial: 'ca-app-pub-6959590598551540/7535041114'
+			};
+			alert("onLoadAd(): android"); //debug
+		} else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+			admobid = { // for iOS
+				banner: 'ca-app-pub-6959590598551540/9151375115',
+				interstitial: 'ca-app-pub-6959590598551540/9011774319'
+			};
+			alert("onLoadAd(): android");	//debug
+		} else {
+			admobid = { // for Windows Phone
+				banner: 'ca-app-pub-6869992474017983/8878394753',
+				interstitial: 'ca-app-pub-6959590598551540/1488507514'
+			};
+		}
+
+		function onLoadAd() {
+			if(( /(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent) )) {
+				document.addEventListener('deviceready', initApp, false);
+			} else {
+				initApp();
+			}
+		}
+
+		function initApp() {
+			if (! AdMob ) { alert( 'admob plugin not ready' ); return; }
+
+			AdMob.createBanner( {
+				adId: admobid.banner, 
+				isTesting: true,
+				overlap: false, 
+				offsetTopBar: false, 
+				position: AdMob.AD_POSITION.BOTTOM_CENTER,
+				bgColor: 'black'
+			} );
+		}	
+	</script>
 </div>
 
 </body>
