@@ -1,11 +1,5 @@
  function onLoadAd() {
-		if(( /(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent) )) {
-			document.addEventListener('deviceready', initApp, false);
-		} else {
-			initApp();
-		}
-	}
-	
+	 	
 	var admobid = {};
 	if( /(android)/i.test(navigator.userAgent) ) { 
 		admobid = { // for Android
@@ -23,8 +17,13 @@
 			interstitial: 'ca-app-pub-6869992474017983/1355127956'
 		};
 	}
-        
-function initApp() {
+		if(( /(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent) )) {
+			document.addEventListener('deviceready', initApp, false);
+		} else {
+			initApp();
+		}
+		
+	function initApp() {
 	if (! AdMob ) { alert( 'Error loading Ads' ); return; }
 	// display the banner at startup
 	AdMob.createBanner( {
@@ -33,4 +32,6 @@ function initApp() {
 		overlap:true, 
 		position:AdMob.AD_POSITION.BOTTOM_CENTER, 
 		autoShow:true}
+	}
 }
+    
