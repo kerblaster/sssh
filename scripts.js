@@ -230,8 +230,10 @@ function refreshHeader(){	//onLoad
 	for (var x = 0; x < stageBorder.length; x++){
 		stageBorder[x].style.borderColor = bgColor;
 	}	
+	
 	//onload advertisement for $$$$$
-	onLoadAd();	//make sure html page has access to admob.js
+	//onLoadAd();	//make sure html page has access to admob.js
+	
 	//make all "back" history url redirect.html
 	history.replaceState(null, "Redirect", "versus.html");	
 }
