@@ -18,10 +18,10 @@
 		};
 	}
 	
-	debug();
 	initApp();
 		
 	function initApp() {
+		alert("AdMob="+AdMob);
 		if (! AdMob ) { alert( 'Error loading Ads' ); return; }
 		alert( 'initApp()' );//debug
 		// display the banner at startup
@@ -31,10 +31,6 @@
 			overlap:true, 
 			position:AdMob.AD_POSITION.BOTTOM_CENTER, 
 			autoShow:true} );
-	}
-		
-	function debug(){
-		alert( 'device is ready' );//debug
 	}
 }
     
