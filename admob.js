@@ -1,4 +1,3 @@
- 	
 var admobid = {};
 
  function onLoadAd() {
