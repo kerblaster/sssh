@@ -8,6 +8,8 @@
 	<link rel="shortcut icon" href="../images/fav.ico" />
 	<link rel="stylesheet" type="text/css" href="../style.css" />
 	<script type="text/javascript" src="../scripts.js"></script>
+	<script src="../phonegap.js"></script>
+	<script type="text/javascript" src="../admob.js"></script>
 	<script type="text/javascript">
 		function postGame(){
 			//update html
@@ -143,7 +145,7 @@
 		}
 	</script>
 </head>
-<body onload="refreshHeader();refreshScore();postGame();">
+<body onload="refreshHeader();refreshScore();postGame();onLoadAd();">
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
@@ -208,6 +210,7 @@
 			<img id="halfRightCharacter5" class="overlapChar" src="../images/blank.png"/>
 		</div>
 	</div>
+	<div class="clearBox"></div>
 </div>
 	<div class="score" id="leftScore"></div>
 	<div class="score" id="rightScore"></div>

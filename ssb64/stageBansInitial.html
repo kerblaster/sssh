@@ -8,6 +8,8 @@
 	<link rel="shortcut icon" href="../images/fav.ico" />
 	<link rel="stylesheet" type="text/css" href="../style.css" />
 	<script type="text/javascript" src="../scripts.js"></script>
+	<script src="../phonegap.js"></script>
+	<script type="text/javascript" src="../admob.js"></script>
 	<script>
 		var banCounter = 2;	//decreases per ban initialized below
 		function stageBansInitial(){//updates html text onload
@@ -71,7 +73,7 @@
 		}
 	</script>
 </head>
-<body onload="refreshHeader();refreshScore();stageBansInitial();rectanglify('.buttonStage',2);turnBoxPoint();">
+<body onload="refreshHeader();refreshScore();stageBansInitial();rectanglify('.buttonStage',2);turnBoxPoint();onLoadAd();">
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
@@ -104,6 +106,8 @@
 	<div class="buttonStage" id="maDiv" style="background-image: url(images/ma.png);" onclick="mutual()"> 
 		Mutual Agreement
 	</div>
+	
+	<div class="clearBox"></div>
 </div>
 	<div class="score" id="leftScore"></div>
 	<div class="score" id="rightScore"></div>

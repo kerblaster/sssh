@@ -8,8 +8,10 @@
 	<link rel="shortcut icon" href="../images/fav.ico" />
 	<link rel="stylesheet" type="text/css" href="../style.css" />
 	<script type="text/javascript" src="../scripts.js"></script>
+	<script src="../phonegap.js"></script>
+	<script type="text/javascript" src="../admob.js"></script>
 </head>
-<body onload="saveSmashTitle('pm');">
+<body onload="saveSmashTitle('pm');onLoadAd();">
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
@@ -40,6 +42,8 @@
 	</div>
 	<br/>
 	<div class="button" onClick="parent.location='../rulesets/pm.html'">PM Ruleset</div>
+	
+	<div class="clearBox"></div>
 </div>
 
 </body>

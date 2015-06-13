@@ -9,6 +9,8 @@
 	<link rel="stylesheet" type="text/css" href="../style.css" />
 	<script type="text/javascript" src="../scripts.js"></script>
 	<script type="text/javascript" src="../admob.js"></script>
+	<script src="../phonegap.js"></script>
+	
 </head>
 <body onload="refreshHeader();refreshScore();squarify('.buttonChar',4);vsCharacter('left');boxPoint('right');onLoadAd();"> <!--4.15 fits, not 4-->
 <a name="top"></a>
@@ -59,6 +61,8 @@
 
 	<div class="buttonChar" id="Marth" onClick="saveRightChar('Marth');" style="background-image:url('images/marth.png');"></div>
 	<div class="buttonChar" id="Roy" onClick="saveRightChar('Roy');" style="background-image:url('images/roy.png');"></div>
+	
+	<div class="clearBox"></div>
 </div>
 	<div class="score" id="leftScore"></div>
 	<div class="score" id="rightScore"></div>

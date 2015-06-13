@@ -8,8 +8,10 @@
 	<link rel="shortcut icon" href="../images/fav.ico" />
 	<link rel="stylesheet" type="text/css" href="../style.css" />
 	<script type="text/javascript" src="../scripts.js"></script>
+	<script src="../phonegap.js"></script>
+	<script type="text/javascript" src="../admob.js"></script>
 </head>
-<body onload="refreshHeader();refreshScore();squarify('.buttonChar',4);vsCharacter('left');boxPoint('right');"> <!--4.15 fits, not 4-->
+<body onload="refreshHeader();refreshScore();squarify('.buttonChar',4);vsCharacter('left');boxPoint('right');onLoadAd();"> <!--4.15 fits, not 4-->
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
@@ -39,6 +41,8 @@
 	<div class="buttonChar" id="Fox" onclick="saveRightChar('Fox');" style="background-image:url('images/fox.png');"></div>
 	<div class="buttonChar" id="Pikachu" onclick="saveRightChar('Pikachu');" style="background-image:url('images/pikachu.png');"></div>
 	<div class="buttonChar" id="Jigglypuff" onclick="saveRightChar('Jigglypuff');" style="background-image:url('images/jigglypuff.png');"></div>
+	
+	<div class="clearBox"></div>
 </div>
 	<div class="score" id="leftScore"></div>
 	<div class="score" id="rightScore"></div>

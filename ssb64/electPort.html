@@ -8,6 +8,8 @@
 	<link rel="shortcut icon" href="../images/fav.ico" />
 	<link rel="stylesheet" type="text/css" href="../style.css" />
 	<script type="text/javascript" src="../scripts.js"></script>
+	<script src="../phonegap.js"></script>
+	<script type="text/javascript" src="../admob.js"></script>
 	<script>
 		function electPort(){	//for electPort.html 
 			var first = rng();	//"left" or "right"
@@ -23,7 +25,7 @@
 		}
 	</script>
 </head>
-<body onload="refreshHeader();refreshScore();electPort();turnBoxPoint();">
+<body onload="refreshHeader();refreshScore();electPort();turnBoxPoint();onLoadAd();">
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
@@ -45,6 +47,8 @@
 	<div class="button" onClick="savePort('port')">  <!--Add cookie-->
 		Choose Port
 	</div>
+	
+	<div class="clearBox"></div>
 </div>
 	<div class="score" id="leftScore"></div>
 	<div class="score" id="rightScore"></div>
