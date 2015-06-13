@@ -24,7 +24,7 @@ var admobid = {};
 function initApp(){	//delete adSize if there is a problem
 	if(AdMob) AdMob.createBanner( {
 		adId: admobid.banner, 
-		adSize:'CUSTOM',   height:50, width:320,
+		adSize:'CUSTOM',   height:50,
 		position: AdMob.AD_POSITION.BOTTOM_CENTER, 
 		autoShow: true } );
 }
