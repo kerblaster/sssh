@@ -212,8 +212,8 @@ td
 
 .buttonChar
 {
-	/*width: 33%; //changed by js*/
-	/*height: width; //changed by js*/
+	width: 24%; /*changed by js*/
+	height: 15%; /*changed by js*/
 	background-color:transparent;
 	position: relative;
 	display: inline;
@@ -226,8 +226,8 @@ td
 
 .buttonStage 
 {
-	/*width: 50%; //changed by js*/
-	/*height: 50%/2; //changed by js*/
+	width: 49%; /*changed by js*/
+	height: 15%; /*changed by js*/
 	background: no-repeat center center;
 	background-color:black;
 	position: relative;

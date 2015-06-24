@@ -7,6 +7,8 @@
 	<meta name="description" content="Interactive set rules for the competitive Super Smash Brothers series" />
 	<link rel="shortcut icon" href="images/fav.ico" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script src="../phonegap.js"></script>
+	<script type="text/javascript" src="../admob.js"></script>
 	<style>/*in the html brcause these properties are unique to the project]*/
 	#clock
 	{
@@ -28,7 +30,7 @@
 	<script type="text/javascript" src="scripts.js"></script>
 	<script type="text/javascript" src="clock.js"></script>
 </head>
-<body>
+<body onload="onLoadAd();">
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
