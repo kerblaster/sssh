@@ -34,7 +34,9 @@
   <icon src="www/res/icon/windows-phone/icon-173-tile.png" gap:platform="winphone" gap:role="background"/>
   
 	<gap:plugin name="com.google.cordova.admob" source="plugins.cordova.io" />
-	<gap:plugin name="cordova-plugin-whitelist" version="1.0.0"/>
+	<plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
+	<plugin name="InAppBrowser" value="CDVInAppBrowser" />
+	<plugin name="InAppBrowser" />
 	
   <gap:splash src="www/res/screen/android/screen-ldpi-portrait.png" gap:platform="android" gap:qualifier="port-ldpi"/>
   <gap:splash src="www/res/screen/android/screen-mdpi-portrait.png" gap:platform="android" gap:qualifier="port-mdpi"/>
@@ -47,8 +49,11 @@
   <gap:splash src="www/res/screen/ios/screen-ipad-portrait.png" gap:platform="ios" width="768" height="1024"/>
   <gap:splash src="www/res/screen/ios/screen-ipad-landscape.png" gap:platform="ios" width="1024" height="768"/>
   <gap:splash src="www/res/screen/windows-phone/screen-portrait.jpg" gap:platform="winphone"/>
+  
   <access origin="*"/>
   <plugin name="cordova-plugin-whitelist" version="1"/>
+  <allow-navigation href="*" />
+  
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>
