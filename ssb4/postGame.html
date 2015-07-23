@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="../scripts.js"></script>
 	<script src="../phonegap.js"></script>
 	<script type="text/javascript" src="../admob.js"></script>
+	<script type="text/javascript" src="../iscroll.js"></script>  
 	<script type="text/javascript">
 		function postGame(){
 			//update html
@@ -145,7 +146,7 @@
 		}
 	</script>
 </head>
-<body onload="refreshHeader();refreshScore();postGame();onLoadAd();">
+<body onload="refreshHeader();refreshScore();postGame();iscroll();onLoadAd();">
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
@@ -155,7 +156,8 @@
 	</div>
 </div>
 <!------------------------------------------------------------------------->
-<div class="main"> 
+<div id="wrapper"> 
+<div id="scroller"> 
 	<div id="instructions"></div>
 	<div id="coin"></div>
 	
@@ -212,7 +214,8 @@
 		</div>
 	</div>
 	
-	<div class="clearBox"></div>
+	 
+</div>
 </div>
 	<div class="score" id="leftScore"></div>
 	<div class="score" id="rightScore"></div>

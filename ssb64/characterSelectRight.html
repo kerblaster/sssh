@@ -10,8 +10,9 @@
 	<script type="text/javascript" src="../scripts.js"></script>
 	<script src="../phonegap.js"></script>
 	<script type="text/javascript" src="../admob.js"></script>
+	<script type="text/javascript" src="../iscroll.js"></script>
 </head>
-<body onload="refreshHeader();refreshScore();squarify('.buttonChar',4);vsCharacter('left');boxPoint('right');onLoadAd();"> <!--4.15 fits, not 4-->
+<body onload="refreshHeader();refreshScore();squarify('.buttonChar',4);vsCharacter('left');boxPoint('right');iscroll();onLoadAd();"> <!--4.15 fits, not 4-->
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
@@ -21,7 +22,9 @@
 	</div>
 </div>
 <!------------------------------------------------------------------------->
-<div class="main"><a name="top"></a> <!-- not transparent -->
+<div id="wrapper"> 
+<div id="scroller">
+<a name="top"></a> <!-- not transparent -->
 
 	<div id="turnBox"></div>
 	<div id="instructions">Select your character:</div>
@@ -42,7 +45,7 @@
 	<div class="buttonChar" id="Pikachu" onclick="saveRightChar('Pikachu');" style="background-image:url('images/pikachu.png');"></div>
 	<div class="buttonChar" id="Jigglypuff" onclick="saveRightChar('Jigglypuff');" style="background-image:url('images/jigglypuff.png');"></div>
 	
-	<div class="clearBox"></div>
+</div>
 </div>
 	<div class="score" id="leftScore"></div>
 	<div class="score" id="rightScore"></div>

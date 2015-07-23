@@ -10,8 +10,9 @@
 	<script type="text/javascript" src="../scripts.js"></script>
 	<script src="../phonegap.js"></script>
 	<script type="text/javascript" src="../admob.js"></script>
+	<script type="text/javascript" src="../iscroll.js"></script>
 </head>
-<body onload="refreshHeader();testCookieRecieve('title');onLoadAd();">
+<body onload="refreshHeader();testCookieRecieve('title');iscroll();onLoadAd();">
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
@@ -21,7 +22,8 @@
 	</div>
 </div>
 <!------------------------------------------------------------------------->
-<div class="main" id="transMain"> 
+<div id="wrapper"> 
+<div id="scroller">
 	<div id="instructions">
 		Select how long the series will last:
 	</div>
@@ -34,10 +36,8 @@
 	</div>
 	<div class="button" onClick="saveBestOf('BO5');">  <!--Add cookie-->
 		Best of 5 (3 wins)
-	</div>
-	
-	<div class="clearBox"></div>
+	</div>	 
 </div>
-
+</div>
 </body>
 </html>

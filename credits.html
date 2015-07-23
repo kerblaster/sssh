@@ -8,8 +8,9 @@
 	<link rel="shortcut icon" href="images/fav.ico" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script type="text/javascript" src="scripts.js"></script>
+	<script type="text/javascript" src="iscroll.js"></script>
 </head>
-<body onload="getLastModified();getVersion();">
+<body onload="getLastModified();getVersion();iscroll();">
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
@@ -19,7 +20,8 @@
 	</div>
 </div>
 <!------------------------------------------------------------------------->
-<div class="main" id="transMain"> <!--MAIN BODY-->
+<div id="wrapper">
+	<div id="scroller">
 	<div id="instructions" style="text-align: left; padding: 20px;">  
 	
 		<b>Super Smash Set Helper</b> <span id="version"></span><br> 
@@ -39,10 +41,10 @@
 			<li>Adam Zufall</li>
 			<li>Bellocan (TO)</li>
 		</ul>
-		<hr><!--DIVIDER--><br><br>
+		<hr><!--DIVIDER--><br>
 		<b>Super Smash Bros. and all of its characters are copyrighted by Nintendo and HAL Laboratory.</b>
 	</div>
 </div>
-
+</div>
 </body>
 </html>

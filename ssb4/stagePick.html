@@ -10,9 +10,15 @@
 	<script type="text/javascript" src="../scripts.js"></script>
 	<script src="../phonegap.js"></script>
 	<script type="text/javascript" src="../admob.js"></script>
+	<script type="text/javascript" src="../iscroll.js"></script>  
 	<script>
 		var banCounter;	//at max 1 ban
 		function stagePick(){//updates html text onload
+			//update stage cleanup
+			var event = getCookie("event");
+			if (event == "SINGLES"){
+				document.getElementById('kjDiv').style.display = "none";
+			}
 			//auto ban stages winner already won in
 			var prevWinner = getCookie("winner");
 			var loser = opposite(prevWinner); //note: loser's pick and dsr rule on loser
@@ -33,15 +39,11 @@
 					}
 				}	
 			}
-			else{	//never won a stage yet
-				//console.log("Never won a stage yet");
-				//console.log("loser_stagesWon="+loser_stagesWon+"|stagesBanString="+stagesBanString+" <-should be null");	//debug
-			}
 			//set html depending on series bo3/bo5
 			var bestOf = getCookie("bestOf");
 			var winner = getCookie("winner");
 			if (bestOf == "BO3"){	//bo3: banning->pick phase
-				banCounter = 1;
+				banCounter = 2;
 				boxPoint(winner);	//winner bans
 				banHTML();
 			}
@@ -57,8 +59,14 @@
 			}
 		}
 		function banHTML(){	//different from initialStageBans
-			document.getElementById('instructions').style.background = "red";
-			document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/><b>[BAN]</b> &#8658; PICK";
+			if (banCounter == 2){
+				document.getElementById('instructions').style.background = "red";
+				document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/><b>[BAN]</b>-BAN &#8658; PICK";
+			}
+			else if (banCounter == 1){
+				document.getElementById('instructions').style.background = "red";
+				document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/>BAN-<b>[BAN]</b> &#8658; PICK";
+			}
 		}
 		function pickHTML(){ //different from initialStageBans
 			var bestOf = getCookie("bestOf");
@@ -68,7 +76,7 @@
 			}
 			else if (bestOf == "BO3"){	//bestOf == BO3
 				document.getElementById('instructions').style.background = "#00EE00"; //green
-				document.getElementById('instructions').innerHTML = matchDetails() + "Pick a stage: <br/>BAN &#8658; <b>[PICK]</b>";
+				document.getElementById('instructions').innerHTML = matchDetails() + "Pick a stage: <br/>BAN-BAN &#8658; <b>[PICK]</b>";
 			}
 			else{
 				alert ("pickHTML(); besOf="+bestOf);
@@ -77,8 +85,16 @@
 		function stageStriking(stage){//when pressed on a stage
 			var winner = getCookie("winner");	
 			var loser = opposite(winner);
-			if (banCounter == 1){	//bo3
+			if (banCounter == 2){	//bo3
 				setCookie("ban",stage);
+				var img = document.getElementById(stage);
+				img.src = "../images/ban.png";
+				var stageDiv = stage+"Div";
+				document.getElementById(stageDiv).onclick="#";	//make banned stage unclickable
+				banHTML(); //after ban => pick update html
+				banCounter--;	
+			}
+			else if (banCounter == 1){
 				var img = document.getElementById(stage);
 				img.src = "../images/ban.png";
 				var stageDiv = stage+"Div";
@@ -86,7 +102,7 @@
 				pickHTML(); //after ban => pick update html
 				boxPoint(loser); //loser picks stage
 				location.href = "#top"; 	//scroll to top
-				banCounter--;	
+				banCounter--;				
 			}
 			else if (banCounter == 0){	//bo5 or alrdy banned
 				//convert code to actual stage name and make cookie
@@ -106,7 +122,7 @@
 		}
 	</script>
 </head>
-<body onload="refreshHeader();refreshScore();stagePick();rectanglify('.buttonStage',2);onLoadAd();">
+<body onload="refreshHeader();refreshScore();stagePick();rectanglify('.buttonStage',2);iscroll();onLoadAd();">
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
@@ -116,7 +132,9 @@
 	</div>
 </div>
 <!------------------------------------------------------------------------->
-<div class="main"> <a name="top"></a>
+<div id="wrapper"> 
+<div id="scroller">
+ <a name="top"></a>
 	<div id="turnBox" ></div>
 	<div id="instructions"></div>
 	
@@ -132,6 +150,10 @@
 		<img class="imgStage"  id="dp" src="../images/blank.png"/>
 		Delfino Plaza
 	</div>
+	<div class="buttonStage" id="dlDiv" style="background-image: url(images/dl.png);" onclick="stageStriking('dl')"> 
+		<img class="imgStage"  id="dl" src="../images/blank.png"/> 
+		Dream Land
+	</div>
 	<div class="buttonStage" id="dhDiv" style="background-image: url(images/dh.png);" onclick="stageStriking('dh')"> 
 		<img class="imgStage"  id="dh" src="../images/blank.png"/>
 		Duck Hunt
@@ -143,6 +165,10 @@
 	<div class="buttonStage" id="hbDiv" style="background-image: url(images/hb.png);" onclick="stageStriking('hb')"> 
 		<img class="imgStage"  id="hb" src="../images/blank.png"/> 
 		Halberd
+	</div>
+	<div class="buttonStage" id="kjDiv" style="background-image: url(images/kj.png);" onclick="stageStriking('kj')"> 
+		<img class="imgStage"  id="kj" src="../images/blank.png"/> <!-- 2v2 -->
+		Kongo Jungle
 	</div>
 	<div class="buttonStage" id="lcDiv" style="background-image: url(images/lc.png);" onclick="stageStriking('lc')"> 
 		<img class="imgStage"  id="lc" src="../images/blank.png">
@@ -160,7 +186,8 @@
 		Mutual Agreement
 	</div>
 	
-	<div class="clearBox"></div>
+	 
+</div>
 </div>
 	<div class="score" id="leftScore"></div>
 	<div class="score" id="rightScore"></div>

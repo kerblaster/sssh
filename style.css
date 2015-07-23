@@ -96,6 +96,39 @@ td
 	z-index:2;
 }
 
+/*iscroll css*/
+#wrapper {
+	position: absolute;
+	z-index: 1;
+	top: 60px; /*room for header*/
+	bottom: 0; /*room for footer*/
+	width: 100%;
+	background: #000;
+	overflow: hidden;
+}
+
+#scroller {
+	position: absolute;
+	z-index: 1;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	width: 100%;
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+	-o-text-size-adjust: none;
+	text-size-adjust: none;
+}
+
 #floatLeft
 {
 	left:5%;
@@ -150,6 +183,7 @@ td
 	position: relative;
 	padding-right: 20px;
 	padding-left: 20px;
+	text-align: center;
 }
 
 .banner
@@ -195,15 +229,6 @@ td
 	font-weight:bold;
 }
 
-.clearBox /* Ads clear box placebo for bottom spacing */
-{
-	width: 100%;
-	height: 50px;
-	position:relative; 
-	opacity:0;
-	filter:alpha(opacity=0); /* For IE8 and earlier */
-}
-
 #piece
 {
 	height:20px;
@@ -241,6 +266,7 @@ td
 	font-size: 20px;
 	text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 	border:5px solid black;
+	text-align: center;
 }
 
 
@@ -348,6 +374,7 @@ td
 	font-family: "Arial Black", Gadget, sans-serif;
 	font-size:15px;
 	position: relative;
+	text-align: center;
 }
 
  /*postGame.html screen only*/
@@ -358,6 +385,7 @@ td
 	width: 100%;
 	color: white;
 	float:left;
+	text-align: center;
 }
 .charData
 {

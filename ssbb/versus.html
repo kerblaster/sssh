@@ -10,8 +10,9 @@
 	<script type="text/javascript" src="../scripts.js"></script>
 	<script src="../phonegap.js"></script>
 	<script type="text/javascript" src="../admob.js"></script>
+	<script type="text/javascript" src="../iscroll.js"></script> 
 </head>
-<body onload="saveSmashTitle('brawl');onLoadAd();"><!--DECLARE GAME TYPE-->
+<body onload="saveSmashTitle('brawl');iscroll();onLoadAd();"><!--DECLARE GAME TYPE-->
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
@@ -21,7 +22,8 @@
 	</div>
 </div>
 <!------------------------------------------------------------------------->
-<div class="main" id="transMain">
+<div id="wrapper"> 
+<div id="scroller">
 	<div id="instructions">
 		<b>Warning:</b> Pressing 'back' or 'refresh' during an active set will clear all set data and redirect you back here.
 		<hr>
@@ -42,9 +44,7 @@
 	</div>
 	<br/>
 	<div class="button" onClick="parent.location='../rulesets/brawl.html'">Brawl Ruleset</div>
-	
-	<div class="clearBox"></div>
 </div>
-
+</div>
 </body>
 </html>

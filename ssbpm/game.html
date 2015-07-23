@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="../scripts.js"></script>
 	<script src="../phonegap.js"></script>
 	<script type="text/javascript" src="../admob.js"></script>
+	<script type="text/javascript" src="../iscroll.js"></script>
 	<script type="text/javascript">
 		var startTime;
 		function game(){	//onload
@@ -85,7 +86,7 @@
 		}
 	</script>
 </head>
-<body onload="refreshHeader();refreshScore();game();flashingText('flashing','red','black');time();onLoadAd();">
+<body onload="refreshHeader();refreshScore();game();flashingText('flashing','red','black');time();iscroll();onLoadAd();">
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
@@ -95,7 +96,8 @@
 	</div>
 </div>
 <!------------------------------------------------------------------------->
-<div class="main"> 
+<div id="wrapper"> 
+<div id="scroller">
 	<div id="instructions"></div>
 	
 	<div id="flashing">ACTIVE GAME</div>
@@ -109,7 +111,7 @@
 	</div>
 	<div id= "stage" class="buttonStage"></div>
 	
-	<div class="clearBox"></div>
+</div>	 
 </div>
 	<div class="score" id="leftScore"></div>
 	<div class="score" id="rightScore"></div>

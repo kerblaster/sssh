@@ -8,8 +8,9 @@
 	<link rel="shortcut icon" href="../images/fav.ico" />
 	<link rel="stylesheet" type="text/css" href="../style.css" />
 	<script type="text/javascript" src="../scripts.js"></script>
+	<script type="text/javascript" src="../iscroll.js"></script>
 </head>
-<body>
+<body onload="iscroll();">
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
@@ -19,7 +20,8 @@
 	</div>
 </div>
 <!------------------------------------------------------------------------->
-<div class="main" style="text-align:left;"> <!--MAIN BODY-->
+<div id="wrapper">
+	<div id="scroller">
 	<img class="banner" src="../images/banner/ssb4banner.png"></img>
 	<div id="instructions">
 		<b>Smash 4 Ruleset</b><hr>
@@ -32,7 +34,7 @@
 		<hr><!--DIVIDER-->
 		<b>Ruleset Source</b>
 			<ul>
-				<li><a href="http://evo.shoryuken.com/additional-rules/">EVO Tournament Rules</a></li>
+				<li><a href="https://ceogaming.org/rules">CEO Rules</a></li>
 			</ul>
 		<hr><!--DIVIDER-->
 		<b>Required Settings</b>
@@ -53,24 +55,29 @@
 		<b>Stages</b>
 		<br/><u>Neutral Starters</u>:
 			<ul>
-				<li>Battlefield</li>
+				<li>Battlefield/Miiverse</li>
+				<li>Dreamland</li>
+				<li>Final Destination/Omega Stages</li>
+				<li>Smashville</li>
+				<li>Town & City</li>
+			</ul>
+		<br/><u>Counterpicks</u>:
+			<ul>
 				<li>Castle Siege</li>
 				<li>Delfino Plaza</li>
 				<li>Duck Hunt</li>
-				<li>Final Destination</li>
 				<li>Halberd</li>
+				<li>Kongo Jungle (doubles only)</li>
 				<li>Lylat Cruise</li>
-				<li>Smashville</li>
-				<li>Town and City</li>
-			</ul>	
+			</ul>			
 		<hr><!--DIVIDER-->
 		<b>Match Procedure</b>
 			<ol>
 				<li>Select your characters. May elect to double blind (secretly tell third party)</li>
 				<li>RPS to determine port priority</li>
-				<li>Stage strike to determine first stage (Singles: 1-2-2-2-1, Doubles: 1-2-2-2-1). Player with port priority gets second ban.</li>
+				<li>Stage strike to determine first stage (Singles: 1-2-1, Doubles: 1-2-1). Player with port priority gets second ban.</li>
 				<li>Start first game</li>
-				<li>Winner bans a stage from starters</li>
+				<li>Winner bans 2 stages from either neutral or counterpick stages</li>
 				<li>Loser picks a stage from the list. May not pick any stage previously won on unless mutually agreed to (DSR)</li>
 				<li>Winner may change character</li>
 				<li>Loser may change character</li>
@@ -82,7 +89,6 @@
 			<ul>
 				<li>Ties: Stocks->Percentage->Replay</li>
 				<li>Amiibo's are banned</li>
-				<li>Omega Stages are banned</li>
 				<li>Mii Fighters and Custom Moves may/may not be banned</li>
 				<li>Certain Custom Moves may be banned</li>
 			</ul>			
@@ -91,6 +97,6 @@
 			
 	</div>
 </div>
-
+</div>
 </body>
 </html>

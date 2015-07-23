@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="../scripts.js"></script>
 	<script src="../phonegap.js"></script>
 	<script type="text/javascript" src="../admob.js"></script>
+	<script type="text/javascript" src="../iscroll.js"></script>  
 	<script>
 		function mkCheck(){	//Double Meta Knight is banned for doubles, not legal on Halberd or Delfino Plaza
 			var stage = getCookie("stage");
@@ -43,7 +44,7 @@
 		}
 	</script>
 </head>
-<body onload="refreshHeader();refreshScore();squarify('.buttonChar',4);vsCharacter('right');boxPoint('left');mkCheck();onLoadAd();"> <!--4.15 fits, not 4-->
+<body onload="refreshHeader();refreshScore();squarify('.buttonChar',4);vsCharacter('right');boxPoint('left');mkCheck();iscroll();onLoadAd();"> <!--4.15 fits, not 4-->
 <a name="top"></a>
 
 <div id="header"> Super Smash Set Helper
@@ -54,7 +55,9 @@
 	</div>
 </div>
 <!------------------------------------------------------------------------->
-<div class="main"><a name="top"></a> <!-- not transparent -->
+<div id="wrapper"> 
+<div id="scroller">
+<a name="top"></a> <!-- not transparent -->
 	<div id="turnBox"></div>
 	<div id="instructions">Select your character:</div>
 	<!-- Change id (only for teams), save_Char("") and background-image relative to char -->
@@ -104,8 +107,7 @@
 	<div class="buttonChar" id="GameNWatch" onclick="saveLeftChar('GameNWatch');" style="background-image:url('images/gamenwatch.png');"></div>
 	<div class="buttonChar" id="Snake" onclick="saveLeftChar('Snake');" style="background-image:url('images/snake.png');"></div>
 	<div class="buttonChar" id="Sonic" onclick="saveLeftChar('Sonic');" style="background-image:url('images/sonic.png');"></div>
-	
-	<div class="clearBox"></div>
+</div>
 </div>
 	<div class="score" id="leftScore"></div>
 	<div class="score" id="rightScore"></div>

@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="scripts.js"></script>
 	<script src="../phonegap.js"></script>
 	<script type="text/javascript" src="../admob.js"></script>
+	<script type="text/javascript" src="iscroll.js"></script>
 	<script>
 		function rps(){	
 			var way = rng();	//"left" or "right"
@@ -26,17 +27,18 @@
 		}
 	</script>
 </head>
-<body onload="onLoadAd();">
+<body onload="iscroll();onLoadAd();">
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
 		<img id="floatLeft" onclick="parent.location='index.html'" src="images/logo.png"/>
 		<img id="floatRight" onclick="parent.location='menu.html'" src="images/menu.png"></img>
-		<span id="status">Rock Paper Scissors</span>
+		<span id="status">RPS</span>
 	</div>
 </div>
 <!------------------------------------------------------------------------->
-<div class="main" id="transMain"> <!--MAIN BODY-->
+<div id="wrapper">
+<div id="scroller">
 	<div id="instructions"> 
 	During sets, players may elect to play Rock Paper Scissors to mutually decide match conflicts. 
 	<hr>Pressing the button below will decide who (left or right player) is the winner of the conflict. 
@@ -46,6 +48,6 @@
 	</div>
 	<div id="turnBox" style="display:none;" onclick="window.location.reload()"></div>
 </div>
-
+</div>
 </body>
 </html>

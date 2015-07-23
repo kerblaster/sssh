@@ -24,7 +24,7 @@ time = int of sec of time elapsed
 */
 
 var version = "v.2.0.0";
-var lastModified = "6/8/15"
+var lastModified = "7/22/15"
 
 function credits(){
 	alert("Super Smash Set Helper "+getVersion()+"\n\nCreated by: Renard Tumbokon\nTag: Kerblaster\n\nLast Modified: "+ getLastModified());
@@ -198,6 +198,15 @@ function mutual(){//when mutual agreement on stage is pressed
 //Onload functions 
 ////////////////////////////
 
+function iscroll(){	//scroll gracefully
+	var myScroll;
+	loaded();
+	function loaded () {
+		myScroll = new IScroll('#wrapper', { scrollX: true, mouseWheel: true, click: true });
+	}
+	document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+}
+
 function refreshHeader(){	//onLoad
 	//change header
 	var headerText = getCookie("headerText");
@@ -221,7 +230,7 @@ function refreshHeader(){	//onLoad
 		bgColor = "#dcdbfd";
 	}
 	document.body.style.backgroundColor = bgColor;	//bg for body
-	document.getElementsByClassName('main')[0].style.backgroundColor = bgColor;	//bg for main
+	document.getElementById('wrapper').style.backgroundColor = bgColor;	//bg for main
 	var charBorder = document.getElementsByClassName('buttonChar'); //array //bg for char
 	for (var x = 0; x < charBorder.length; x++){
 		charBorder[x].style.borderColor = bgColor;
@@ -265,7 +274,7 @@ function squarify(element, numFitInRow){						//for characterSelect
 	main();
 	function main(){
 		var width = window.innerWidth;
-		width = (Math.floor(width/numFitInRow)-(getScrollBarWidth()/numFitInRow));	//hard math	to include scrollbar to width
+		width = (Math.floor(width/numFitInRow));	//-(getScrollBarWidth()/numFitInRow)
 		var nodes = document.querySelectorAll(element);				//loop all buttonChar
 		for (var i = 0; i < nodes.length; i++){
 			nodes[i].style.height = width+"px";
@@ -282,7 +291,7 @@ function rectanglify(element, numFitInRow){						//for characterSelect
 	main();
 	function main(){
 		var width = window.innerWidth;
-		width = (Math.floor(width/numFitInRow)-(getScrollBarWidth()/numFitInRow));	//hard math	to include scrollbar to width
+		width = (Math.floor(width/numFitInRow));	//-(getScrollBarWidth()/numFitInRow)
 		var nodes = document.querySelectorAll(element);				//loop all buttonChar
 		for (var i = 0; i < nodes.length; i++){
 			nodes[i].style.height = (width/2)+"px";
@@ -919,6 +928,9 @@ function translateStage(stage){
 		else if (stage == "dh"){
 			translated = "Duck Hunt";
 		}
+		else if (stage == "dl"){
+			translated = "Dream Land";
+		}
 		else if (stage == "dp"){
 			translated = "Delfino Plaza";
 		}
@@ -927,6 +939,9 @@ function translateStage(stage){
 		}
 		else if (stage == "hb"){
 			translated = "Halberd";
+		}
+		else if (stage == "kj"){
+			translated="Kongo Jungle";
 		}
 		else if (stage == "lc"){
 			translated = "Lylat Cruise";
@@ -950,6 +965,9 @@ function translateStage(stage){
 			else if (stage == "Duck Hunt"){
 				translated="dh";
 			}
+			else if (stage == "Dream Land"){
+				translated="dl";
+			}
 			else if (stage == "Delfino Plaza"){
 				translated="dp";
 			}
@@ -958,6 +976,9 @@ function translateStage(stage){
 			}
 			else if (stage == "Halberd"){
 				translated="hb";
+			}
+			else if (stage == "Kongo Jungle"){
+				translated="kj";
 			}
 			else if (stage == "Lylat Cruise"){
 				translated="lc";

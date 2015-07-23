@@ -29,8 +29,9 @@
 	</style>
 	<script type="text/javascript" src="scripts.js"></script>
 	<script type="text/javascript" src="clock.js"></script>
+	<script type="text/javascript" src="iscroll.js"></script>
 </head>
-<body onload="onLoadAd();">
+<body onload="iscroll();onLoadAd();">
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
@@ -40,7 +41,8 @@
 	</div>
 </div>
 <!------------------------------------------------------------------------->
-<div class="main" id="transMain"> <!--MAIN BODY-->
+<div id="wrapper">
+<div id="scroller">
 	<div id="instructions"> 
 	Hand warmers must not take up a significant amount of time(30s) to avoid delay from the tournament schedule or setup rotation.<hr>Press the button to start the countdown,<br>and press the timer to restart the clock. 
 	</div>
@@ -51,6 +53,6 @@
 		<span id="time" style="">00:00</span><!--span dynamically change-->
 	</div>
 </div>
-
+</div>
 </body>
 </html>

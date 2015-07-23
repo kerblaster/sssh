@@ -29,8 +29,9 @@
 	<script type="text/javascript" src="clock.js"></script>
 	<script src="../phonegap.js"></script>
 	<script type="text/javascript" src="../admob.js"></script>
+	<script type="text/javascript" src="iscroll.js"></script>
 </head>
-<body onload="onLoadAd();">
+<body onload="iscroll();onLoadAd();">
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
@@ -40,7 +41,8 @@
 	</div>
 </div>
 <!------------------------------------------------------------------------->
-<div class="main" id="transMain"> <!--MAIN BODY-->
+<div id="wrapper">
+<div id="scroller">
 	<div id="instructions"> 
 	Players must be punctual and be mindful of tournament flow. When their designated play times are called: <i>5 min late is a match loss</i> while <i>10 min late is a set loss</i>. <hr>Press the button to start the countdown,<br>and press the timer to restart the clock. 
 	</div>
@@ -50,6 +52,7 @@
 	<div id="clock" onClick="resetTimer();">
 		<span id="time" style="">00:00</span><!--span dynamically change-->
 	</div>
+</div>
 </div>
 
 </body>

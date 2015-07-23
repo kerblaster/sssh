@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="../scripts.js"></script>
 	<script src="../phonegap.js"></script>
 	<script type="text/javascript" src="../admob.js"></script>
+	<script type="text/javascript" src="../iscroll.js"></script> 
 	<script>
 		var banCounter;	//ban = 2 for winner
 		function stagePick(){//updates html text onload
@@ -101,7 +102,7 @@
 		}
 	</script>
 </head>
-<body onload="refreshHeader();refreshScore();stagePick();rectanglify('.buttonStage',2);onLoadAd();">
+<body onload="refreshHeader();refreshScore();stagePick();rectanglify('.buttonStage',2);iscroll();onLoadAd();">
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
@@ -111,7 +112,9 @@
 	</div>
 </div>
 <!------------------------------------------------------------------------->
-<div class="main"> <a name="top"></a>
+<div id="wrapper"> 
+<div id="scroller">
+ <a name="top"></a>
 	<div id="turnBox" ></div>
 	<div id="instructions"></div>
 	
@@ -154,8 +157,7 @@
 	<div class="buttonStage" id="maDiv" style="background-image: url(images/ma.png);" onclick="mutual()"> 
 		Mutual Agreement
 	</div>
-	
-	<div class="clearBox"></div>
+</div>
 </div>
 	<div class="score" id="leftScore"></div>
 	<div class="score" id="rightScore"></div>

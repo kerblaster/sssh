@@ -8,8 +8,9 @@
 	<link rel="shortcut icon" href="images/fav.ico" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script type="text/javascript" src="scripts.js"></script>
+	<script type="text/javascript" src="iscroll.js"></script>
 </head>
-<body>
+<body onload="iscroll();">
 
 <div id="header"> Super Smash Set Helper
 	<div id="description" > <!--bar displays description-->
@@ -19,8 +20,9 @@
 	</div>
 </div>
 <!------------------------------------------------------------------------->
-<div class="main" style="text-align: left;"> <!--MAIN BODY-->
-	<div id="instructions">
+<div id="wrapper">
+<div id ="scroller">
+	<div id="instructions" style="text-align:left;">
 	  
 		Concise instructions for navigating this app<hr>
 		<!--All the following instructions should be below, separated by <hr> with bolded title-->
@@ -125,6 +127,6 @@
 			
 	</div>
 </div>
-
+</div>
 </body>
 </html>
