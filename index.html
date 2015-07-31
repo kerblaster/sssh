@@ -8,6 +8,7 @@
 	<link rel="shortcut icon" href="images/fav.ico" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script type="text/javascript" src="scripts.js"></script>
+	<script type="text/javascript" src="iscroll.js"></script>
 	<script type="text/javascript">
 		function resizeHeight(){
 			main();
@@ -26,7 +27,7 @@
 		}
 	</script>
 </head>
-<body onload="resizeHeight();">
+<body onload="resizeHeight();iscroll();">
 
 <div id="header"> Super Smash Set Helper
 	<center>
@@ -38,14 +39,17 @@
 	</center>
 </div>
 <!------------------------------------------------------------------------->
-<div class="main"> <!--MAIN MENU BUTTON LAYOUT-->
+<div id="wrapper">
+	<div id="scroller">
+	
 <a href="ssb64/versus.html"><img class="banner" src="images/banner/ssb64banner.png"></img></a>
 <a href="ssbm/versus.html"><img class="banner" src="images/banner/ssbmbanner.png"></img></a>
 <a href="ssbb/versus.html"><img class="banner" id="halfBanner" style="border-right: 3px solid black; left:0; float:left;" src="images/banner/ssbbbanner.png"></img></a>
 <a href="ssbpm/versus.html"><img class="banner" id="halfBanner" style="border-left: 3px solid black; right:0; float:right;" src="images/banner/ssbpmbanner.png"></img></a>
 <a href="ssb4/versus.html"><img class="banner"  src="images/banner/ssb4banner.png"></img></a>
-</div>
 
+	</div>
+</div>
 </body>
 </html>
 
