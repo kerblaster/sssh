@@ -27,7 +27,7 @@ var version = "v.2.0.0";
 var lastModified = "7/22/15"
 
 function credits(){
-	alert("Super Smash Set Helper "+getVersion()+"\n\nCreated by: Renard Tumbokon\nTag: Kerblaster\n\nLast Modified: "+ getLastModified());
+	alert("Smash Set Helper "+getVersion()+"\n\nCreated by: Renard Tumbokon\nTag: Kerblaster\n\nLast Modified: "+ getLastModified());
 }
 
 function getVersion(){	//<span id="version" onload="getVersion()"></span>

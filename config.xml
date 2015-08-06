@@ -1,5 +1,5 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.kerblast.sssh" version="1.0.1">
-  <name>Super Smash Set Helper</name>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.kerblast.sssh" version="1.0.2">
+  <name>Smash Set Helper</name>
   <description>Interactive set rules for the competitive Super Smash Brothers series</description>
   <author href="http://www.twitter.com/kerblaster" email="kerblaster@hotmail.com">Renard Tumbokon</author>
   <content src="index.html"/>
