@@ -14,11 +14,6 @@
 	<script>
 		var banCounter;	//at max 1 ban
 		function stagePick(){//updates html text onload
-			//update stage cleanup
-			var event = getCookie("event");
-			if (event == "SINGLES"){
-				document.getElementById('kjDiv').style.display = "none";
-			}
 			//auto ban stages winner already won in
 			var prevWinner = getCookie("winner");
 			var loser = opposite(prevWinner); //note: loser's pick and dsr rule on loser
@@ -91,8 +86,8 @@
 				img.src = "../images/ban.png";
 				var stageDiv = stage+"Div";
 				document.getElementById(stageDiv).onclick="#";	//make banned stage unclickable
-				banHTML(); //after ban => pick update html
-				banCounter--;	
+				banCounter--;
+				banHTML(); //after ban => pick update html					
 			}
 			else if (banCounter == 1){
 				var img = document.getElementById(stage);
@@ -165,10 +160,6 @@
 	<div class="buttonStage" id="hbDiv" style="background-image: url(images/hb.png);" onclick="stageStriking('hb')"> 
 		<img class="imgStage"  id="hb" src="../images/blank.png"/> 
 		Halberd
-	</div>
-	<div class="buttonStage" id="kjDiv" style="background-image: url(images/kj.png);" onclick="stageStriking('kj')"> 
-		<img class="imgStage"  id="kj" src="../images/blank.png"/> <!-- 2v2 -->
-		Kongo Jungle
 	</div>
 	<div class="buttonStage" id="lcDiv" style="background-image: url(images/lc.png);" onclick="stageStriking('lc')"> 
 		<img class="imgStage"  id="lc" src="../images/blank.png">

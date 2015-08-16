@@ -12,42 +12,26 @@
 	<script type="text/javascript" src="../admob.js"></script>
 	<script type="text/javascript" src="../iscroll.js"></script>
 	<script>
-		var banCounter = 8;	//decreases per ban
+		var banCounter = 4;	//decreases per ban
 		function stageBansInitial(){//updates html text onload
 			//stage ban/legal cleanup
 			var event = getCookie("event");
 			//do before the banCounter-th ban
 			if (banCounter > 0){	//banning phase
 				document.getElementById('instructions').style.background = "red";			
-				if (banCounter == 8){	//does when page first loads
-					document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/> <b>[BAN]</b> &#8658; BAN-BAN &#8658; BAN-BAN <br/>&#8658; BAN-BAN &#8658; BAN &#8658; PICK";
-				}
-				else if (banCounter == 7){ //change and 1st ban
-					document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/> BAN &#8658; <b>[BAN]</b>-BAN &#8658; BAN-BAN <br/>&#8658; BAN-BAN &#8658; BAN &#8658; PICK";
-					switchChooser();	
-					turnBoxPoint();
-				}
-				else if (banCounter == 6){	//2nd ban
-					document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/> BAN &#8658; BAN-<b>[BAN]</b> &#8658; BAN-BAN <br/>&#8658; BAN-BAN &#8658; BAN &#8658; PICK";
-				}
-				else if (banCounter == 5){	//change and 1st ban
-					document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/> BAN &#8658; BAN-BAN &#8658; <b>[BAN]</b>-BAN <br/>&#8658; BAN-BAN &#8658; BAN &#8658; PICK";
-					switchChooser();
-					turnBoxPoint();
-				}
-				else if (banCounter == 4){	//2nd ban
-					document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/> BAN &#8658; BAN-BAN &#8658; BAN-<b>[BAN]</b> <br/>&#8658; BAN-BAN &#8658; BAN &#8658; PICK";
+				if (banCounter == 4){	//2nd ban
+					document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/> <b>[BAN]</b> &#8658; BAN-BAN &#8658; BAN &#8658; PICK";
 				}
 				else if (banCounter == 3){	//change and 1st ban
-					document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/> BAN &#8658; BAN-BAN &#8658; BAN-BAN <br/>&#8658; <b>[BAN]</b>-BAN &#8658; BAN &#8658; PICK";
+					document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/> BAN &#8658; <b>[BAN]</b>-BAN &#8658; BAN &#8658; PICK";
 					switchChooser();
 					turnBoxPoint();
 				}
 				else if (banCounter == 2){	//2nd ban
-					document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/> BAN &#8658; BAN-BAN &#8658; BAN-BAN <br/>&#8658; BAN-<b>[BAN]</b> &#8658; BAN &#8658; PICK";
+					document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/> BAN &#8658; BAN-<b>[BAN]</b> &#8658; BAN &#8658; PICK";
 				}
 				else if (banCounter == 1){	//chhange and ban
-					document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/> BAN &#8658; BAN-BAN &#8658; BAN-BAN <br/>&#8658; BAN-BAN &#8658; <b>[BAN]</b> &#8658; PICK";
+					document.getElementById('instructions').innerHTML = matchDetails() + "Ban a stage: <br/> BAN &#8658; BAN-BAN &#8658; <b>[BAN]</b> &#8658; PICK";
 					switchChooser();
 					turnBoxPoint();
 				}
@@ -56,7 +40,7 @@
 				switchChooser();
 				document.getElementById('turnBox').style.display = "none";	//make disapear, not matter who picks stage
 				document.getElementById('instructions').style.background = "#00EE00"; //green
-				document.getElementById('instructions').innerHTML = matchDetails() + "Pick a stage: <br/> BAN &#8658; BAN-BAN &#8658; BAN-BAN <br/>&#8658; BAN-BAN &#8658; BAN &#8658; <b>[PICK]</b>";
+				document.getElementById('instructions').innerHTML = matchDetails() + "Pick a stage: <br/> BAN &#8658; BAN-BAN &#8658; BAN &#8658; <b>[PICK]</b>";
 			}
 		}
 		function stageStriking(stage){//when pressed on a stage
@@ -103,28 +87,32 @@
 		<img class="imgStage"  id="bf" src="../images/blank.png"/>
 		Battlefield
 	</div>
-	<div class="buttonStage" id="csDiv" style="background-image: url(images/cs.png);" onclick="stageStriking('cs')"> 
-		<img class="imgStage"  id="cs" src="../images/blank.png"/>
+	<div class="buttonStage" id="csDiv" style="background-image: url(images/cs.png);" onclick="counterpickAlert()"> 
+		<img class="imgStage"  id="cs" src="../images/ban.png"/> <!-- autoban: counterpick stage 1v1 -->
 		Castle Siege
 	</div>
-	<div class="buttonStage" id="dpDiv" style="background-image: url(images/dp.png);" onclick="stageStriking('dp')"> 
-		<img class="imgStage"  id="dp" src="../images/blank.png"/>
+	<div class="buttonStage" id="dpDiv" style="background-image: url(images/dp.png);" onclick="counterpickAlert()"> 
+		<img class="imgStage"  id="dp" src="../images/ban.png"/> <!-- autoban: counterpick stage 1v1 -->
 		Delfino Plaza
 	</div>
-	<div class="buttonStage" id="dhDiv" style="background-image: url(images/dh.png);" onclick="stageStriking('dh')"> 
-		<img class="imgStage"  id="dh" src="../images/blank.png"/>
+	<div class="buttonStage" id="dlDiv" style="background-image: url(images/dl.png);" onclick="stageStriking('dl')"> 
+		<img class="imgStage"  id="dl" src="../images/blank.png">
+		Dream Land
+	</div>
+	<div class="buttonStage" id="dhDiv" style="background-image: url(images/dh.png);" onclick="counterpickAlert()"> 
+		<img class="imgStage"  id="dh" src="../images/ban.png"/> <!-- autoban: counterpick stage 1v1 -->
 		Duck Hunt
 	</div>
 	<div class="buttonStage" id="fdDiv" style="background-image: url(images/fd.png);" onclick="stageStriking('fd')"> 
 		<img class="imgStage"  id="fd" src="../images/blank.png"/> 
 		Final Destination
 	</div>
-	<div class="buttonStage" id="hbDiv" style="background-image: url(images/hb.png);" onclick="stageStriking('hb')"> 
-		<img class="imgStage"  id="hb" src="../images/blank.png"/> 
+	<div class="buttonStage" id="hbDiv" style="background-image: url(images/hb.png);" onclick="counterpickAlert()"> 
+		<img class="imgStage"  id="hb" src="../images/ban.png"/>  <!-- autoban: counterpick stage 1v1 -->
 		Halberd
 	</div>
-	<div class="buttonStage" id="lcDiv" style="background-image: url(images/lc.png);" onclick="stageStriking('lc')"> 
-		<img class="imgStage"  id="lc" src="../images/blank.png">
+	<div class="buttonStage" id="lcDiv" style="background-image: url(images/lc.png);" onclick="counterpickAlert()"> 
+		<img class="imgStage"  id="lc" src="../images/ban.png"> <!-- autoban: counterpick stage 1v1 -->
 		Lylat Cruise
 	</div>
 	<div class="buttonStage" id="svDiv" style="background-image: url(images/sv.png);" onclick="stageStriking('sv')"> 
